@@ -17,15 +17,25 @@ Page {
         }
         SilicaGridView {
             width: page.width; height:page.height
-            model: 10
+            model: notes
             delegate: BackgroundItem {
                 width: ListView.view.width
                 onClicked: console.log("clicked!")
                 Label {
-                    text: "Note"
+                    text: text
                 }
             }
         }
+        ListModel {
+            id:notes
+        }
 
+    }
+    Component.onCompleted: {
+        Storage.initialize();
+        var loadedNotes = Storage.getNotes();
+        for(i = 0; i < loadedNotes.length; i++) {
+            notes.append({text:loadedNotes[i].text});
+        }
     }
 }

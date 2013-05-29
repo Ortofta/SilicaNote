@@ -22,7 +22,7 @@ function setSetting(id, text) {
    var db = getDatabase();
    var res = "";
    db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO settings VALUES (?,?);', [id,text]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO notes VALUES (?,?);', [id,text]);
               //console.log(rs.rowsAffected)
               if (rs.rowsAffected > 0) {
                 res = "OK";
@@ -39,14 +39,23 @@ function getSetting(id) {
    var db = getDatabase();
    var res="";
    db.transaction(function(tx) {
-     var rs = tx.executeSql('SELECT value FROM settings WHERE id=?;', [id]);
+     var rs = tx.executeSql('SELECT value FROM notes WHERE id=?;', [id]);
      if (rs.rows.length > 0) {
-          res = rs.rows.item(0).value;
-     } else {
-         res = "Unknown";
+          res = rs.rows.item(0).text;
      }
-  })
+  });
   // The function returns “Unknown” if the setting was not found in the database
   // For more advanced projects, this should probably be handled through error codes
-  return res
+  return res;
+}
+
+// Get all notes from the database
+function getNotes() {
+    var db = getDatabase();
+    var res = [];
+    db.transaction(function(tx) {
+        var res = tx.executeSql('SELECT * FROM notes');
+    });
+
+    return res;
 }
