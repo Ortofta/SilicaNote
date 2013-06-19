@@ -13,7 +13,7 @@ Page {
         }
         Button {
             text: "New note"
-            onClicked: console.log("Add note")
+            onClicked: pageStack.push(Qt.resolvedUrl("NotePage.qml"))
         }
         SilicaGridView {
             width: page.width; height:page.height

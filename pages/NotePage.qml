@@ -1,0 +1,50 @@
+import QtQuick 1.1
+import Sailfish.Silica 1.0
+import "js/storage.js" as Storage
+
+Page {
+    id: notepage
+
+    PageHeader {
+        title: "Create Note"
+    }
+    SilicaFlickable {
+        anchors.fill: parent
+            contentHeight: column.height
+            Column {
+                id: column
+                width: parent.width
+                spacing: 20
+
+                Label {
+                     color: theme.highlightColor
+                     font.family: theme.fontFamilyHeading
+                     text: "Title:"
+                 }
+
+                TextField {
+                     width: 480
+                     height: 30
+                     placeholderText: "Note title"
+                 }
+
+                Label {
+                     color: theme.highlightColor
+                     font.family: theme.fontFamilyHeading
+                     text: "Note:"
+                 }
+
+                TextArea {
+                    width: 480
+                    height: 300
+                     placeholderText: "Enter text here!"
+                }
+
+                Button {
+                    text: "Save"
+                    onClicked: pageStack.pop()
+                }
+            }
+    }
+}
+

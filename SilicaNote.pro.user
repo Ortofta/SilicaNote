@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by Qt Creator 2.6.2, 2013-05-26T20:23:34. -->
+<!-- Written by Qt Creator 2.6.2, 2013-06-19T20:48:50. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -105,7 +105,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">/home/eitmsn/git/SilicaNote</value>
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">false</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
@@ -156,7 +156,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">/home/eitmsn/git/SilicaNote</value>
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">false</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">2</value>
@@ -178,12 +178,62 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Upload files via SFTP</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles"/>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts"/>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths"/>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots"/>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes"/>
-      <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">false</value>
+      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
+       <value type="QString">/home/eitmsn/git/SilicaNote/pages/SecondPage.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/SilicaNote.desktop</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/pages/NotePage.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/main.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/cover/CoverPage.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/pages/FirstPage.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/pages/MainPage.qml</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/pages/js/storage.js</value>
+       <value type="QString">/home/eitmsn/git/SilicaNote/SilicaNote</value>
+      </valuelist>
+      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+       <value type="QString">localhost</value>
+      </valuelist>
+      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
+       <value type="QString">/opt/sdk/share/SilicaNote/pages</value>
+       <value type="QString">/opt/sdk/share/applications</value>
+       <value type="QString">/opt/sdk/share/SilicaNote/pages</value>
+       <value type="QString">/opt/sdk/share/SilicaNote</value>
+       <value type="QString">/opt/sdk/share/SilicaNote/cover</value>
+       <value type="QString">/opt/sdk/share/SilicaNote/pages</value>
+       <value type="QString">/opt/sdk/share/SilicaNote/pages</value>
+       <value type="QString">/opt/sdk/share/SilicaNote/pages/js</value>
+       <value type="QString">/opt/sdk/bin</value>
+      </valuelist>
+      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+       <value type="QString">/home/eitmsn/SailfishOS/mersdk/targets/SailfishOS-i486-x86</value>
+      </valuelist>
+      <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
+       <value type="QDateTime">2013-05-28T21:15:03</value>
+       <value type="QDateTime">2013-05-28T21:15:04</value>
+       <value type="QDateTime">2013-06-19T20:47:36</value>
+       <value type="QDateTime">2013-05-28T21:17:54</value>
+       <value type="QDateTime">2013-05-28T21:15:03</value>
+       <value type="QDateTime">2013-05-28T21:15:03</value>
+       <value type="QDateTime">2013-06-19T20:44:02</value>
+       <value type="QDateTime">2013-05-29T22:00:19</value>
+       <value type="QDateTime">2013-06-19T20:38:48</value>
+      </valuelist>
+      <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
      </valuemap>
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">2</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Deploy</value>
@@ -200,8 +250,8 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">rpm/SilicaNote.yaml</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/Users/markus/SailfishOS/Qt Creator.app/Contents/Resources/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/specify</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/home/eitmsn/SailfishOS/share/qtcreator/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/specify</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/home/eitmsn/git/SilicaNote</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Custom Process Step</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.ProcessStep</value>
@@ -209,8 +259,8 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">-rf /home/mersdk/rpmbuild/RPMS/</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/Users/markus/SailfishOS/Qt Creator.app/Contents/Resources/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/rm</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/home/eitmsn/SailfishOS/share/qtcreator/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/rm</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/home/eitmsn/git/SilicaNote</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Custom Process Step</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.ProcessStep</value>
@@ -218,8 +268,8 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.2">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">build -t MerSDK-SailfishOS-i486-x86 rpm/SilicaNote.spec</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/Users/markus/SailfishOS/Qt Creator.app/Contents/Resources/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/mb</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/home/eitmsn/SailfishOS/share/qtcreator/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/mb</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/home/eitmsn/git/SilicaNote</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Custom Process Step</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.ProcessStep</value>
@@ -227,8 +277,8 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.3">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">-T /home/mersdk/rpmbuild/RPMS/*/* rpm/SilicaNote-MerSDK-SailfishOS-i486-x86.rpm</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/Users/markus/SailfishOS/Qt Creator.app/Contents/Resources/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/mv</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/Users/markus/Documents/SailfishOS/SilicaNote</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Command">/home/eitmsn/SailfishOS/share/qtcreator/MerProject/mer-sdk-tools/MerSDK/SailfishOS-i486-x86/mv</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">/home/eitmsn/git/SilicaNote</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Custom Process Step</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.ProcessStep</value>
@@ -278,7 +328,7 @@
     </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">SilicaNote (on Remote Device)</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.MerRunConfiguration:/Users/markus/Documents/SailfishOS/SilicaNote/SilicaNote.pro</value>
+    <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.MerRunConfiguration:/home/eitmsn/git/SilicaNote/SilicaNote.pro</value>
     <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.Arguments"></value>
     <value type="int" key="Qt4ProjectManager.MaemoRunConfiguration.BaseEnvironmentBase">1</value>
     <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.ProFile">SilicaNote.pro</value>
@@ -301,7 +351,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.Updater.EnvironmentId</variable>
-  <value type="QString">{927265a9-9744-4cba-ae7a-5f3a9cb83fd6}</value>
+  <value type="QString">{ccdb74ae-26a2-4c79-9da5-fb994ed8bbcb}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.Updater.FileVersion</variable>
