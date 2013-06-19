@@ -15,7 +15,7 @@ function initialize() {
 
 function writeNote(title, text) {
    var db = getDatabase();
-   var res = "";
+   var res = "";pageStack.pop()
    db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO notes VALUES (?,?);', [title, text]);
               //console.log(rs.rowsAffected)
