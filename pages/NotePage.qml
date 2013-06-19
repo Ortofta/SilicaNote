@@ -10,6 +10,7 @@ Page {
     }
     SilicaFlickable {
         anchors.fill: parent
+        anchors.topMargin: 150
             contentHeight: column.height
             Column {
                 id: column
