@@ -24,6 +24,7 @@ Page {
                  }
 
                 TextField {
+                    id: notetitle
                      width: 480
                      height: 30
                      placeholderText: "Note title"
@@ -36,6 +37,7 @@ Page {
                  }
 
                 TextArea {
+                    id: notetext
                     width: 480
                     height: 300
                      placeholderText: "Enter text here!"
@@ -43,7 +45,10 @@ Page {
 
                 Button {
                     text: "Save"
-                    onClicked: pageStack.pop()
+                    onClicked: {
+                        Storage.writeNote(notetitle.text, notetext.text)
+                        pageStack.pop()
+                    }
                 }
             }
     }
