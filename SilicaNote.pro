@@ -17,5 +17,6 @@ desktop.files = SilicaNote.desktop
 include(sailfishapplication/sailfishapplication.pri)
 
 OTHER_FILES = rpm/SilicaNote.yaml \
-    js/storage.js
+    js/storage.js \
+    rpm/SilicaNote.spec
 
