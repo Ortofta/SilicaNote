@@ -52,9 +52,9 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/opt/sdk/share/applications
-/opt/sdk/share/SilicaNote
-/opt/sdk/bin
 /opt
+/opt/sdk/bin
+/opt/sdk/share/SilicaNote
+/opt/sdk/share/applications
 # >> files
 # << files

@@ -17,8 +17,8 @@ PkgBR:
 Requires:
 - 
 Files:
-- /opt/sdk/share/applications
-- /opt/sdk/share/SilicaNote
-- /opt/sdk/bin
-- /opt
 - 
+- /opt
+- /opt/sdk/bin
+- /opt/sdk/share/SilicaNote
+- /opt/sdk/share/applications
