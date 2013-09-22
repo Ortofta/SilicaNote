@@ -11,14 +11,15 @@ Description: |
 Configure: none
 Builder: qmake
 PkgConfigBR:
-- 
-PkgBR:
-- 
+- Qt5Quick
+- Qt5Qml
+- Qt5Core
+- qdeclarative5-boostable
+PkgBR: []
 Requires:
-- 
+- mapplauncherd-booster-silica-qt5
+- sailfishsilica-qt5
 Files:
-- 
-- /opt
-- /opt/sdk/bin
-- /opt/sdk/share/SilicaNote
-- /opt/sdk/share/applications
+- /usr/bin
+- /usr/share/SilicaNote
+- /usr/share/applications

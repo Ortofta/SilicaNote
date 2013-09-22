@@ -2,7 +2,7 @@
 Type=Application
 Name=SilicaNote
 Icon=icon-launcher-gallery
-Exec=invoker --type=j -s /opt/sdk/bin/SilicaNote
+Exec=invoker --type=silica-qt5 -s /usr/bin/SilicaNote
 Comment=Sailfish UI application
 
 

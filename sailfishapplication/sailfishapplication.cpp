@@ -1,16 +1,14 @@
-
-#include <QApplication>
+#include <QGuiApplication>
 #include <QDir>
-#include <QGraphicsObject>
 
 #ifdef DESKTOP
 #include <QGLWidget>
 #endif
 
-#include <QDeclarativeComponent>
-#include <QDeclarativeEngine>
-#include <QDeclarativeContext>
-#include <QDeclarativeView>
+#include <QQmlComponent>
+#include <QQmlEngine>
+#include <QQmlContext>
+#include <QQuickView>
 
 #ifdef HAS_BOOSTER
 #include <MDeclarativeCache>
@@ -18,22 +16,22 @@
 
 #include "sailfishapplication.h"
 
-QApplication *Sailfish::createApplication(int &argc, char **argv)
+QGuiApplication *Sailfish::createApplication(int &argc, char **argv)
 {
 #ifdef HAS_BOOSTER
     return MDeclarativeCache::qApplication(argc, argv);
 #else
-    return new QApplication(argc, argv);
+    return new QGuiApplication(argc, argv);
 #endif
 }
 
-QDeclarativeView *Sailfish::createView(const QString &file)
+QQuickView *Sailfish::createView(const QString &file)
 {
-    QDeclarativeView *view;
+    QQuickView *view;
 #ifdef HAS_BOOSTER
     view = MDeclarativeCache::qDeclarativeView();
 #else
-    view = new QDeclarativeView;
+    view = new QQuickView;
 #endif
     
     bool isDesktop = qApp->arguments().contains("-desktop");
@@ -52,8 +50,8 @@ QDeclarativeView *Sailfish::createView(const QString &file)
     return view;
 }
 
-void Sailfish::showView(QDeclarativeView* view) {
-    view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
+void Sailfish::showView(QQuickView* view) {
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
     
     bool isDesktop = qApp->arguments().contains("-desktop");
     

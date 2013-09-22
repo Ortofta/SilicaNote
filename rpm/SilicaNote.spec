@@ -19,6 +19,12 @@ Group:      Qt/Qt
 License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  SilicaNote.yaml
+Requires:   sailfishsilica-qt5
+Requires:   mapplauncherd-booster-silica-qt5
+BuildRequires:  pkgconfig(qdeclarative5-boostable)
+BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires:  pkgconfig(Qt5Quick)
 
 %description
 A simple note taking app for SailfishOS
@@ -52,9 +58,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/opt
-/opt/sdk/bin
-/opt/sdk/share/SilicaNote
-/opt/sdk/share/applications
+/usr/share/applications
+/usr/share/SilicaNote
+/usr/bin
 # >> files
 # << files
