@@ -5,3 +5,5 @@ obj/
 SilicaNote.pro
 SilicaNote.pro.user
 *.autosave
+
+*.o

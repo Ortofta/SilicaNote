@@ -1,14 +1,14 @@
 #include <QGuiApplication>
 #include <QDir>
-
-#ifdef DESKTOP
-#include <QGLWidget>
-#endif
-
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QQuickView>
+#include <QQuickItem>
+
+#ifdef HAS_BOOSTER
+#include <MDeclarativeCache>
+#endif
 
 #ifdef HAS_BOOSTER
 #include <MDeclarativeCache>
@@ -52,19 +52,14 @@ QQuickView *Sailfish::createView(const QString &file)
 
 void Sailfish::showView(QQuickView* view) {
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    
+
     bool isDesktop = qApp->arguments().contains("-desktop");
-    
+
     if (isDesktop) {
-        view->setFixedSize(480, 854);
+        view->resize(480, 854);
         view->rootObject()->setProperty("_desktop", true);
         view->show();
     } else {
-        view->setAttribute(Qt::WA_OpaquePaintEvent);
-        view->setAttribute(Qt::WA_NoSystemBackground);
-        view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-        view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
-        
         view->showFullScreen();
     }
 }

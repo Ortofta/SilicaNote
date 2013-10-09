@@ -10,7 +10,7 @@ namespace Sailfish {
 
 QGuiApplication *createApplication(int &argc, char **argv);
 QQuickView *createView(const QString &);
-void showView(QDeclarativeView* view);
+void showView(QQuickView* view);
 
 }
 

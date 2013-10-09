@@ -40,7 +40,7 @@ A simple note taking app for SailfishOS
 # >> build pre
 # << build pre
 
-%qmake 
+%qmake5 
 
 make %{?jobs:-j%jobs}
 
@@ -51,7 +51,7 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 # >> install pre
 # << install pre
-%qmake_install
+%qmake5_install
 
 # >> install post
 # << install post
