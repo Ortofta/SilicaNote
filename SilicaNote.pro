@@ -1,22 +1,23 @@
-# The name of your app
-TARGET = SilicaNote
+# The name of your app.
+# NOTICE: name defined in TARGET has a corresponding QML filename.
+#         If name defined in TARGET is changed, following needs to be
+#         done to match new name:
+#         - corresponding QML filename must be changed
+#         - desktop icon filename must be changed
+#         - desktop filename must be changed
+#         - icon definition filename in desktop file must be changed
+TARGET = Silicanote
 
-# C++ sources
-SOURCES += main.cpp
+CONFIG += sailfishapp
 
-# C++ headers
-HEADERS +=
+SOURCES += src/Silicanote.cpp
 
-# QML files and folders
-qml.files = *.qml pages cover main.qml
-
-# The .desktop file
-desktop.files = SilicaNote.desktop
-
-# Please do not modify the following line.
-include(sailfishapplication/sailfishapplication.pri)
-
-OTHER_FILES = rpm/SilicaNote.yaml \
-    js/storage.js \
-    rpm/SilicaNote.spec
+OTHER_FILES += qml/Silicanote.qml \
+    qml/cover/CoverPage.qml \
+    rpm/Silicanote.spec \
+    rpm/Silicanote.yaml \
+    Silicanote.desktop \
+    qml/pages/storage.js \
+    qml/pages/NotePage.qml \
+    qml/pages/MainPage.qml
 

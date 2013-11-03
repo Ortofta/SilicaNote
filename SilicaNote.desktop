@@ -1,8 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=SilicaNote
-Icon=icon-launcher-gallery
-Exec=invoker --type=silica-qt5 -s /usr/bin/SilicaNote
-Comment=Sailfish UI application
-
+X-Nemo-Application-Type=silica-qt5
+Name=Silicanote
+Icon=/usr/share/icons/hicolor/90x90/apps/Silicanote.png
+Exec=Silicanote
 
