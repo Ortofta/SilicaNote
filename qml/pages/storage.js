@@ -1,7 +1,7 @@
 //storage.js
 // First, let's create a short helper function to get the database connection
 function getDatabase() {
-     return openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000);
+     return openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
 }
 
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
