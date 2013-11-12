@@ -29,9 +29,8 @@
 */
 
 import QtQuick 2.0
+import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
-
-import "storage.js" as Storage
 
 Page {
     id:page
@@ -63,8 +62,23 @@ Page {
 
     }
     Component.onCompleted: {
-        Storage.initialize();
-        var loadedNotes = Storage.getNotes();
+        // Get all notes from the database
+        function getNotes(db) {
+            var res = [];
+            db.transaction(function(tx) {
+                var res = tx.executeSql('SELECT * FROM notes');
+            });
+
+            return res;
+        }
+
+        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
+        db.transaction(
+            function(tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS notes(id INT UNIQUE, title TEXT, note TEXT)');
+          });
+
+        var loadedNotes = getNotes(db);
         for(i = 0; i < loadedNotes.length; i++) {
             notes.append({text:loadedNotes[i].text});
         }

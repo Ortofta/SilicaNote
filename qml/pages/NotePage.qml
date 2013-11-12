@@ -29,6 +29,7 @@
 */
 
 import QtQuick 2.0
+import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 
 import "storage.js" as Storage
@@ -77,7 +78,24 @@ Page {
                 Button {
                     text: "Save"
                     onClicked: {
-                        Storage.writeNote(notetitle.text, notetext.text)
+                        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
+                        function writeNote(title, text, db) {
+                           var res = "";
+                           db.transaction(function(tx) {
+                               var rs = tx.executeSql('INSERT OR REPLACE INTO notes(title,note) VALUES (?,?);', [title, text]);
+                                      //console.log(rs.rowsAffected)
+                                      if (rs.rowsAffected > 0) {
+                                        res = "OK";
+                                      } else {
+                                        res = "Error";
+                                      }
+                                }
+                          );
+                          // The function returns “OK” if it was successful, or “Error” if it wasn't
+                          return res;
+                        }
+
+                        writeNote(notetitle.text, notetext.text, db);
                         pageStack.pop()
                     }
                 }
