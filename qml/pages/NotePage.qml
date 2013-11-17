@@ -98,6 +98,19 @@ Page {
                         writeNote(notetitle.text, notetext.text, db);
                         pageStack.pop()
                     }
+
+                    function sendHighScore(title, text, url) {
+                         var postman = new XMLHttpRequest()
+                         var postData = "{id:" + name + ",heading:" + title + ",body:" + text + "}";
+                         postman.open("POST", url, true);
+                         postman.setRequestHeader("Content-Type", "application/json");
+                         postman.onreadystatechange = function() {
+                             if (postman.readyState == postman.DONE) {
+                                 dialog.show("Your note has been synced to the server.");
+                             }
+                         }
+                         postman.send(postData);
+                     }
                 }
             }
     }
