@@ -33,7 +33,7 @@ import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id:page
+    id:mainpage
 
     Column {
         width: page.width

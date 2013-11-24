@@ -92,21 +92,25 @@ Page {
                                 }
                           );
                           // The function returns “OK” if it was successful, or “Error” if it wasn't
+                            console.log(res);
                           return res;
                         }
 
                         writeNote(notetitle.text, notetext.text, db);
-                        pageStack.pop()
+                        //sendNote(notetitle.text, notetext.text, "http://www.google.com");
+                        console.log("Pagestack depth " + pageStack.depth);
+                        pageStack.push(Qt.resolvedUrl("MainPage.qml"));
                     }
 
-                    function sendHighScore(title, text, url) {
+                    function sendNote(title, text, url) {
+                         console.log("Syncing note to server...");
                          var postman = new XMLHttpRequest()
                          var postData = "{id:" + name + ",heading:" + title + ",body:" + text + "}";
                          postman.open("POST", url, true);
                          postman.setRequestHeader("Content-Type", "application/json");
                          postman.onreadystatechange = function() {
                              if (postman.readyState == postman.DONE) {
-                                 dialog.show("Your note has been synced to the server.");
+                                 console.log("Your note has been synced to the server.");
                              }
                          }
                          postman.send(postData);
