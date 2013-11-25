@@ -34,14 +34,7 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component {
-        id:start
-        MainPage {
-         Component.onCompleted: {
-             pageStack.push(Qt.resolvedUrl("MainPage.qml"))
-         }
-        }
-    }
+    initialPage: Qt.resolvedUrl("pages/MainPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
 

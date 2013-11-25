@@ -78,7 +78,9 @@ Page {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS notes(id INT UNIQUE, title TEXT, note TEXT)');
           });
 
+        console.log("Pagestack depth " + pageStack.depth);
         var loadedNotes = getNotes(db);
+        var i;
         for(i = 0; i < loadedNotes.length; i++) {
             notes.append({text:loadedNotes[i].text});
         }

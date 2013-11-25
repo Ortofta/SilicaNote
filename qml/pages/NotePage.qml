@@ -78,7 +78,7 @@ Page {
                 Button {
                     text: "Save"
                     onClicked: {
-                        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
+
                         function writeNote(title, text, db) {
                            var res = "";
                            db.transaction(function(tx) {
@@ -96,25 +96,26 @@ Page {
                           return res;
                         }
 
-                        writeNote(notetitle.text, notetext.text, db);
-                        //sendNote(notetitle.text, notetext.text, "http://www.google.com");
-                        console.log("Pagestack depth " + pageStack.depth);
-                        pageStack.push(Qt.resolvedUrl("MainPage.qml"));
-                    }
-
-                    function sendNote(title, text, url) {
-                         console.log("Syncing note to server...");
-                         var postman = new XMLHttpRequest()
-                         var postData = "{id:" + name + ",heading:" + title + ",body:" + text + "}";
-                         postman.open("POST", url, true);
-                         postman.setRequestHeader("Content-Type", "application/json");
-                         postman.onreadystatechange = function() {
-                             if (postman.readyState == postman.DONE) {
-                                 console.log("Your note has been synced to the server.");
+                        function sendNote(title, text, url) {
+                             console.log("Syncing note to server...");
+                             var postman = new XMLHttpRequest()
+                             var postData = "{id:1," + ",heading:" + title + ",body:" + text + "}";
+                             postman.open("POST", url, true);
+                             postman.setRequestHeader("Content-Type", "application/json");
+                             postman.onreadystatechange = function() {
+                                 if (postman.readyState == postman.DONE) {
+                                     console.log("Your note has been synced to the server.");
+                                 }
                              }
+                             postman.send(postData);
                          }
-                         postman.send(postData);
-                     }
+
+                        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
+                        writeNote(notetitle.text, notetext.text, db);
+                        sendNote(notetitle.text, notetext.text, "http://www.google.com");
+                        console.log("PageStack depth: " + pageStack.depth)
+                        pageStack.pop();
+                    }
                 }
             }
     }
