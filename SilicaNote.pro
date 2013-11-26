@@ -10,7 +10,8 @@ TARGET = Silicanote
 
 CONFIG += sailfishapp
 
-SOURCES += src/Silicanote.cpp
+SOURCES += src/Silicanote.cpp \
+    src/servercommunicator.cpp
 
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
@@ -20,4 +21,7 @@ OTHER_FILES += qml/Silicanote.qml \
     qml/pages/storage.js \
     qml/pages/NotePage.qml \
     qml/pages/MainPage.qml
+
+HEADERS += \
+    src/servercommunicator.h
 
