@@ -1,6 +1,7 @@
 #include "servercommunicator.h"
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkRequest>
 
 /**
  * Constructor - setup everything needed by the class
@@ -29,7 +30,9 @@ ServerCommunicator::~ServerCommunicator() {
  */
 void ServerCommunicator::syncNote(const QString id, const QString header, const QString body) {
     QByteArray data = toJson(id, header, body);
-
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://www.google.com"));
+    manager->post(request, data);
 }
 
 QByteArray ServerCommunicator::toJson(const QString id, const QString header, const QString body) {
