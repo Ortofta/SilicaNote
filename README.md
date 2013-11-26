@@ -1,7 +1,12 @@
 SilicaNote
 ==========
 
-Simple SailfishOS note taking app. It is being created as a learning experience for myself to get familiar with the SailfishOS application development environment.
+Simple Sailfish OS note taking app. It is being created as a learning experience for myself to get familiar with the Sailfish OS application development environment.
+It's been a long time since I last looked at C++ and QT - so progress will probably be slow.
+
+The app will have a local SQLite database for note storage, and support for syncing to a remote server as well.
+
+The server is in a separate repo - https://github.com/Ortofta/silicanote-server
 
 Licensing
 =========
