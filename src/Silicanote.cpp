@@ -33,7 +33,7 @@
 #endif
 
 #include <sailfishapp.h>
-
+#include "servercommunicator.h"
 
 int main(int argc, char *argv[])
 {
@@ -45,7 +45,13 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
-
-    return SailfishApp::main(argc, argv);
+    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QQmlEngine engine;
+    ServerCommunicator communicator;
+    engine.rootContext()->setContextProperty("communicator", &communicator);
+    QQuickView *view = SailfishApp::createView();
+    view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
+    view->show();
+    return app->exec();
 }
 
