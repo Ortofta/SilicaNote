@@ -8,10 +8,14 @@
 #         - icon definition filename in desktop file must be changed
 TARGET = Silicanote
 
+QT += sql
+
 CONFIG += sailfishapp
 
 SOURCES += src/Silicanote.cpp \
-    src/servercommunicator.cpp
+    src/servercommunicator.cpp \
+    src/databasemanager.cpp \
+    src/note.cpp
 
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
@@ -23,5 +27,7 @@ OTHER_FILES += qml/Silicanote.qml \
     qml/pages/MainPage.qml
 
 HEADERS += \
-    src/servercommunicator.h
+    src/servercommunicator.h \
+    src/databasemanager.h \
+    src/note.h
 
