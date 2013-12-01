@@ -35,5 +35,17 @@ double DatabaseManager::storeNote(QString title, QString body) {
 
 QList<Note*> DatabaseManager::getNotes() {
     QList<Note*> notes;
+    QSqlQuery query(db);
+    query.exec("SELECT OID, remote_id, title, note FROM notes;");
+
+    while(query.nextResult()) {
+        Note *note = new Note();
+        note->setRowId(query.value(0).toDouble());
+        note->setRemoteId(query.value(1).toDouble());
+        note->setTitle(query.value(2).toString());
+        note->setBody(query.value(3).toString());
+        notes.append(note);
+    }
+
     return notes;
 }
