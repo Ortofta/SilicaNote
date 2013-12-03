@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QtSql/QtSql>
 #include <QList>
+#include <QQmlEngine>
+#include <QJSEngine>
 #include "note.h"
 
 class DatabaseManager : public QObject
@@ -19,5 +21,15 @@ public slots:
     double storeNote(const QString title, const QString body);
     QList<Note*> getNotes();
 };
+
+// Second, define the singleton type provider function (callback).
+static QObject *databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    DatabaseManager *manger = new DatabaseManager();
+    return manger;
+}
 
 #endif // DATABASEMANAGER_H
