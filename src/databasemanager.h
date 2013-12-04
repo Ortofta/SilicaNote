@@ -12,6 +12,7 @@ class DatabaseManager : public QObject
 {
     Q_OBJECT
     QSqlDatabase db;
+    bool isDbOpen();
 public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();

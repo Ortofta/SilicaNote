@@ -1,11 +1,16 @@
 #include "databasemanager.h"
+#include <QDir>
 
-DatabaseManager::DatabaseManager(QObject *parent) :
-    QObject(parent)
-{
+DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
+    QString homePath = QDir().homePath();
     db = QSqlDatabase::addDatabase("QSQLITE", "NoteStorage");
-    db.setDatabaseName("$HOME/.local/share/Silicanote/NoteStorageDb");
+    db.setDatabaseName(homePath + "/.local/share/Silicanote/NoteStorageDb");
     db.open();
+
+    if(!isDbOpen()) {
+        qDebug() << "Database could not be opened: " << db.lastError();
+    }
+
     QSqlQuery query(db);
     query.exec("CREATE TABLE IF NOT EXISTS notes(remote_id INT UNIQUE, title TEXT, note TEXT)");
 }
@@ -17,7 +22,8 @@ DatabaseManager::~DatabaseManager() {
 }
 
 double DatabaseManager::storeNote(QString title, QString body) {
-    if(!db.isOpen()) {
+    if(!isDbOpen()) {
+        qDebug() << "Database is not open - no data has been saved";
         return -1;
     }
 
@@ -28,9 +34,22 @@ double DatabaseManager::storeNote(QString title, QString body) {
     query.bindValue(1, body);
     query.exec();
     query.clear();
-    query.exec("selectlast_insert_rowid()");
+    bool success = query.exec("select last_insert_rowid()");
+
+    if(!success) {
+        qDebug() << "Query failed: " << query.lastError();
+    }
+
     query.first();
     return query.value(0).toDouble();
+}
+
+bool DatabaseManager::isDbOpen() {
+    if(!db.isOpen()) {
+        return false;
+    }
+
+    return true;
 }
 
 QList<Note*> DatabaseManager::getNotes() {

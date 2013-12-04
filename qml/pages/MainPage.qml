@@ -31,6 +31,7 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
+import org.silicanote.DBManager 1.0
 
 Page {
     id:mainpage
@@ -62,28 +63,7 @@ Page {
 
     }
     Component.onCompleted: {
-        // Get all notes from the database
-        function getNotes(db) {
-            var res = [];
-            db.transaction(function(tx) {
-                var res = tx.executeSql('SELECT * FROM notes');
-            });
-
-            return res;
-        }
-
-        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
-        db.transaction(
-            function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS notes(id INT UNIQUE, title TEXT, note TEXT)');
-          });
-
-        console.log("Pagestack depth " + pageStack.depth);
-        var loadedNotes = getNotes(db);
-        var i;
-        for(i = 0; i < loadedNotes.length; i++) {
-            notes.append({text:loadedNotes[i].text});
-        }
+        notes = DBManager.getNotes();
     }
 }
 

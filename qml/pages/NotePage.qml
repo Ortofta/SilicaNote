@@ -31,6 +31,7 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
+import org.silicanote.DBManager 1.0
 
 import "storage.js" as Storage
 
@@ -78,41 +79,7 @@ Page {
                 Button {
                     text: "Save"
                     onClicked: {
-
-                        function writeNote(title, text, db) {
-                           var res = "";
-                           db.transaction(function(tx) {
-                               var rs = tx.executeSql('INSERT OR REPLACE INTO notes(title,note) VALUES (?,?);', [title, text]);
-                                      //console.log(rs.rowsAffected)
-                                      if (rs.rowsAffected > 0) {
-                                        res = "OK";
-                                      } else {
-                                        res = "Error";
-                                      }
-                                }
-                          );
-                          // The function returns “OK” if it was successful, or “Error” if it wasn't
-                            console.log(res);
-                          return res;
-                        }
-
-                        function sendNote(title, text, url) {
-                             console.log("Syncing note to server...");
-                             var postman = new XMLHttpRequest()
-                             var postData = "{id:1," + ",heading:" + title + ",body:" + text + "}";
-                             postman.open("POST", url, true);
-                             postman.setRequestHeader("Content-Type", "application/json");
-                             postman.onreadystatechange = function() {
-                                 if (postman.readyState == postman.DONE) {
-                                     console.log("Your note has been synced to the server.");
-                                 }
-                             }
-                             postman.send(postData);
-                         }
-
-                        var db = LocalStorage.openDatabaseSync("SilicaNote", "1.0", "NoteStorageDatabase", 100000, this);
-                        writeNote(notetitle.text, notetext.text, db);
-                        sendNote(notetitle.text, notetext.text, "http://www.google.com");
+                        DBManager.storeNote(notetitle.text, notetext.text);
                         console.log("PageStack depth: " + pageStack.depth)
                         pageStack.pop();
                     }
