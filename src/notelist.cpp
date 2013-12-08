@@ -14,7 +14,7 @@ void NoteList::addNote(Note *note) {
 }
 
 void NoteList::deleteNote(int index) {
-
+    _notes.removeAt(index);
 }
 
 void NoteList::clearNotes() {
@@ -33,6 +33,6 @@ static int notesSize(QQmlListProperty<Note> *property) {
     return 0;
 }
 
-static Note* NoteAt(QQmlListProperty<Note> *property, int index) {
+static Note* noteAt(QQmlListProperty<Note> *property, int index) {
     return NULL;
 }

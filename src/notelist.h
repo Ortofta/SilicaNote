@@ -22,7 +22,7 @@ public:
 
     static void clearNotes(QQmlListProperty<Note> *property);
     static int notesSize(QQmlListProperty<Note> *property);
-    static Note* NoteAt(QQmlListProperty<Note> *property, int index);
+    static Note* noteAt(QQmlListProperty<Note> *property, int index);
 signals:
 
 public slots:
