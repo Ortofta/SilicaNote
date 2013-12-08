@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DatabaseManager_t {
-    QByteArrayData data[7];
-    char stringdata[61];
+    QByteArrayData data[6];
+    char stringdata[48];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,11 +34,10 @@ QT_MOC_LITERAL(1, 16, 9),
 QT_MOC_LITERAL(2, 26, 0),
 QT_MOC_LITERAL(3, 27, 5),
 QT_MOC_LITERAL(4, 33, 4),
-QT_MOC_LITERAL(5, 38, 8),
-QT_MOC_LITERAL(6, 47, 12)
+QT_MOC_LITERAL(5, 38, 8)
     },
     "DatabaseManager\0storeNote\0\0title\0body\0"
-    "getNotes\0QList<Note*>\0"
+    "getNotes\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +60,7 @@ static const uint qt_meta_data_DatabaseManager[] = {
 
  // slots: parameters
     QMetaType::Double, QMetaType::QString, QMetaType::QString,    3,    4,
-    0x80000000 | 6,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -73,8 +72,7 @@ void DatabaseManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         switch (_id) {
         case 0: { double _r = _t->storeNote((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
-        case 1: { QList<Note*> _r = _t->getNotes();
-            if (_a[0]) *reinterpret_cast< QList<Note*>*>(_a[0]) = _r; }  break;
+        case 1: _t->getNotes(); break;
         default: ;
         }
     }

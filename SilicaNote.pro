@@ -15,7 +15,8 @@ CONFIG += sailfishapp
 SOURCES += src/Silicanote.cpp \
     src/servercommunicator.cpp \
     src/databasemanager.cpp \
-    src/note.cpp
+    src/note.cpp \
+    src/notelist.cpp
 
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
@@ -29,5 +30,6 @@ OTHER_FILES += qml/Silicanote.qml \
 HEADERS += \
     src/servercommunicator.h \
     src/databasemanager.h \
-    src/note.h
+    src/note.h \
+    src/notelist.h
 

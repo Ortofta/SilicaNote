@@ -3,15 +3,18 @@
 
 #include <QObject>
 #include <QtSql/QtSql>
+#include <QQmlListProperty>
 #include <QList>
 #include <QQmlEngine>
 #include <QJSEngine>
 #include "note.h"
+#include "notelist.h"
 
 class DatabaseManager : public QObject
 {
     Q_OBJECT
     QSqlDatabase db;
+    NoteList list;
     bool isDbOpen();
 public:
     explicit DatabaseManager(QObject *parent = 0);
@@ -20,7 +23,7 @@ signals:
 
 public slots:
     double storeNote(const QString title, const QString body);
-    QList<Note*> getNotes();
+    void getNotes();
 };
 
 // Second, define the singleton type provider function (callback).

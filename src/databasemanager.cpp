@@ -52,10 +52,10 @@ bool DatabaseManager::isDbOpen() {
     return true;
 }
 
-QList<Note*> DatabaseManager::getNotes() {
-    QList<Note*> notes;
+void DatabaseManager::getNotes() {
     QSqlQuery query(db);
     query.exec("SELECT OID, remote_id, title, note FROM notes;");
+    list.clearNotes();
 
     while(query.nextResult()) {
         Note *note = new Note();
@@ -63,8 +63,6 @@ QList<Note*> DatabaseManager::getNotes() {
         note->setRemoteId(query.value(1).toDouble());
         note->setTitle(query.value(2).toString());
         note->setBody(query.value(3).toString());
-        notes.append(note);
+        list.addNote(note);
     }
-
-    return notes;
 }
