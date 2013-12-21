@@ -36,6 +36,7 @@
 #include <sailfishapp.h>
 #include "servercommunicator.h"
 #include "databasemanager.h"
+#include "note.h"
 
 int main(int argc, char *argv[])
 {
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
     ServerCommunicator communicator;
     engine.rootContext()->setContextProperty("communicator", &communicator);
     qmlRegisterSingletonType<DatabaseManager>("org.silicanote.DBManager", 1, 0, "DBManager", databaseManagerProvider);
+    qmlRegisterType<Note>("org.silicanote.note", 1, 0, "Note");
     QQuickView *view = SailfishApp::createView();
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();
