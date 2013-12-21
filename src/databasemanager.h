@@ -16,9 +16,12 @@ class DatabaseManager : public QObject
     QSqlDatabase db;
     NoteList list;
     bool isDbOpen();
+    void createDataDir(const QString dataPath);
+
 public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
+
 signals:
 
 public slots:

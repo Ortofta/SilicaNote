@@ -1,10 +1,13 @@
 #include "databasemanager.h"
 #include <QDir>
+#include <QStandardPaths>
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
-    QString homePath = QDir().homePath();
+    QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    qDebug() << "Data path: " << dataPath;
+    createDataDir(dataPath);
     db = QSqlDatabase::addDatabase("QSQLITE", "NoteStorage");
-    db.setDatabaseName(homePath + "/.local/share/Silicanote/NoteStorageDb");
+    db.setDatabaseName(dataPath + "/NoteStorageDb");
     db.open();
 
     if(!isDbOpen()) {
@@ -19,6 +22,17 @@ DatabaseManager::~DatabaseManager() {
     if(db.isOpen()) {
         db.close();
     }
+}
+
+void DatabaseManager::createDataDir(const QString dataPath) {
+    QDir *dir = new QDir();
+    if(!dir->exists(dataPath)) {
+        bool result = dir->mkdir(dataPath);
+        if(!result) {
+            qDebug() << "Could not create data directory " << dataPath;
+        }
+    }
+    delete(dir);
 }
 
 double DatabaseManager::storeNote(QString title, QString body) {
