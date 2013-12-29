@@ -49,10 +49,12 @@ public:
     Q_INVOKABLE void deleteNote(int index);
     Q_INVOKABLE int countNotes();
     Q_INVOKABLE void clearNotes();
+    Q_INVOKABLE Note* noteAt(int index);
 
-    static void clearNotes(QQmlListProperty<Note> *property);
-    static int notesSize(QQmlListProperty<Note> *property);
-    static Note* noteAt(QQmlListProperty<Note> *property, int index);
+    static void append(QQmlListProperty<Note> *property, Note* value);
+    static void clear(QQmlListProperty<Note> *property);
+    static int size(QQmlListProperty<Note> *property);
+    static Note* at(QQmlListProperty<Note> *property, int index);
 signals:
 
 public slots:
