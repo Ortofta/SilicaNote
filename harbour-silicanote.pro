@@ -6,9 +6,9 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
-TARGET = Silicanote
+TARGET = harbour-silicanote
 
-QT += sql
+QT += quick qml core sql
 
 CONFIG += sailfishapp
 
@@ -21,11 +21,11 @@ SOURCES += src/Silicanote.cpp \
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
     rpm/Silicanote.spec \
-    rpm/Silicanote.yaml \
-    Silicanote.desktop \
     qml/pages/storage.js \
     qml/pages/NotePage.qml \
-    qml/pages/MainPage.qml
+    qml/pages/MainPage.qml \
+    rpm/harbour-silicanote.yaml \
+    harbour-silicanote.desktop
 
 HEADERS += \
     src/servercommunicator.h \

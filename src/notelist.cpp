@@ -62,22 +62,22 @@ Note* NoteList::noteAt(int index) {
     return _notes.at(index);
 }
 
-static void append(QQmlListProperty<Note> *property, Note* value) {
+void NoteList::append(QQmlListProperty<Note> *property, Note* value) {
     NoteList *list = (NoteList*) property;
     list->addNote(value);
 }
 
-static void clear(QQmlListProperty<Note> *property) {
+void NoteList::clear(QQmlListProperty<Note> *property) {
     NoteList *list = (NoteList*) property;
     list->clearNotes();
 }
 
-static int size(QQmlListProperty<Note> *property) {
+int NoteList::size(QQmlListProperty<Note> *property) {
     NoteList *list = (NoteList*) property;
     return list->countNotes();
 }
 
-static Note* at(QQmlListProperty<Note> *property, int index) {
+Note* NoteList:: at(QQmlListProperty<Note> *property, int index) {
     NoteList *list = (NoteList*) property;
     return list->noteAt(index);
 }
