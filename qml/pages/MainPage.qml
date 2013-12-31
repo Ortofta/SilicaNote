@@ -44,10 +44,10 @@ Page {
         width: mainpage.width
         height: mainpage.height
         anchors.top: parent.top
-        model: notoModel
+        model: notes
         header: PageHeader { title: "SilicaNote" }
         ViewPlaceholder {
-            enabled: notoList.count == 0
+            enabled: notes.count == 0
             text: qsTr("You have no notes")
         }
         PullDownMenu {
