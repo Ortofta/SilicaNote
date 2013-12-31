@@ -36,34 +36,38 @@ import org.silicanote.DBManager 1.0
 Page {
     id:mainpage
 
-    Column {
-        width: page.width
-        spacing: theme.paddingLarge
-        PageHeader {
-            title: "Notes"
+    ListModel {
+        id: notes
+    }
+
+    SilicaListView {
+        width: mainpage.width
+        height: mainpage.height
+        anchors.top: parent.top
+        model: notoModel
+        header: PageHeader { title: "SilicaNote" }
+        ViewPlaceholder {
+            enabled: notoList.count == 0
+            text: qsTr("You have no notes")
         }
-        Button {
-            text: "New note"
-            onClicked: pageStack.push(Qt.resolvedUrl("NotePage.qml"))
-        }
-        SilicaGridView {
-            width: page.width; height:page.height
-            model: notes
-            delegate: BackgroundItem {
-                width: ListView.view.width
-                onClicked: console.log("clicked!")
-                Label {
-                    text: text
-                }
+        PullDownMenu {
+            MenuItem {
+                text: "About"
+                //onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
+            }
+            MenuItem {
+                text: "Add Note"
+                onClicked: pageStack.push(Qt.resolvedUrl("NotePage.qml"))
+            }
+            MenuItem {
+                text: "Sync"
+                //onClicked: pageStack.push(Qt.resolvedUrl("Todo.qml"),{dataContainer: root})
             }
         }
-        ListModel {
-            id:notes
-        }
-
     }
+
     Component.onCompleted: {
-        notes = DBManager.getNotes();
+        DBManager.getNotes();
     }
 }
 

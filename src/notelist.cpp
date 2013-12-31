@@ -36,7 +36,10 @@ NoteList::NoteList(QObject *parent) :
 }
 
 QQmlListProperty<Note> NoteList::notes() {
-
+    return QQmlListProperty<Note>(this, &_notes, &append,
+                                             &size,
+                                             &at,
+                                             &clear);
 }
 
 void NoteList::addNote(Note *note) {
@@ -52,17 +55,29 @@ void NoteList::clearNotes() {
 }
 
 int NoteList::countNotes() {
-    return 0;
+    return _notes.length();
 }
 
-static void clearNotes(QQmlListProperty<Note> *property) {
-
+Note* NoteList::noteAt(int index) {
+    return _notes.at(index);
 }
 
-static int notesSize(QQmlListProperty<Note> *property) {
-    return 0;
+void NoteList::append(QQmlListProperty<Note> *property, Note* value) {
+    NoteList *list = (NoteList*) property;
+    list->addNote(value);
 }
 
-static Note* noteAt(QQmlListProperty<Note> *property, int index) {
-    return NULL;
+void NoteList::clear(QQmlListProperty<Note> *property) {
+    NoteList *list = (NoteList*) property;
+    list->clearNotes();
+}
+
+int NoteList::size(QQmlListProperty<Note> *property) {
+    NoteList *list = (NoteList*) property;
+    return list->countNotes();
+}
+
+Note* NoteList::at(QQmlListProperty<Note> *property, int index) {
+    NoteList *list = (NoteList*) property;
+    return list->noteAt(index);
 }
