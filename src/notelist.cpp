@@ -29,6 +29,7 @@
 */
 
 #include "notelist.h"
+#include <QtDebug>
 
 NoteList::NoteList(QObject *parent) :
     QObject(parent)
@@ -36,6 +37,7 @@ NoteList::NoteList(QObject *parent) :
 }
 
 QQmlListProperty<Note> NoteList::notes() {
+    qDebug() << "Note list is set up";
     return QQmlListProperty<Note>(this, &_notes, &append,
                                              &size,
                                              &at,
@@ -44,14 +46,17 @@ QQmlListProperty<Note> NoteList::notes() {
 
 void NoteList::addNote(Note *note) {
     _notes.append(note);
+    this->notesChanged();
 }
 
 void NoteList::deleteNote(int index) {
     _notes.removeAt(index);
+    this->notesChanged();
 }
 
 void NoteList::clearNotes() {
     _notes.clear();
+    this->notesChanged();
 }
 
 int NoteList::countNotes() {
@@ -65,11 +70,13 @@ Note* NoteList::noteAt(int index) {
 void NoteList::append(QQmlListProperty<Note> *property, Note* value) {
     NoteList *list = (NoteList*) property;
     list->addNote(value);
+    list->notesChanged();
 }
 
 void NoteList::clear(QQmlListProperty<Note> *property) {
     NoteList *list = (NoteList*) property;
     list->clearNotes();
+    list->notesChanged();
 }
 
 int NoteList::size(QQmlListProperty<Note> *property) {

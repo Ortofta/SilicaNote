@@ -10,6 +10,8 @@ TARGET = harbour-silicanote
 
 QT += quick qml core sql
 
+QML_IMPORT_PATH += src
+
 CONFIG += sailfishapp
 
 SOURCES += src/Silicanote.cpp \

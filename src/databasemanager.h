@@ -44,7 +44,7 @@ class DatabaseManager : public QObject
 {
     Q_OBJECT
     QSqlDatabase db;
-    NoteList list;
+    NoteList* notes;
     bool isDbOpen();
     void createDataDir(const QString dataPath);
 

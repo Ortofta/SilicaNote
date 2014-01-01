@@ -32,6 +32,7 @@ import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import org.silicanote.DBManager 1.0
+import org.silicanote.notelist 1.0
 
 Page {
     id:mainpage
@@ -47,6 +48,7 @@ Page {
         model: notes
         header: PageHeader { title: "SilicaNote" }
         ViewPlaceholder {
+            id: test
             enabled: notes.count == 0
             text: qsTr("You have no notes")
         }
@@ -64,10 +66,9 @@ Page {
                 //onClicked: pageStack.push(Qt.resolvedUrl("Todo.qml"),{dataContainer: root})
             }
         }
-    }
-
-    Component.onCompleted: {
-        DBManager.getNotes();
+        Component.onCompleted: {
+            DBManager.getNotes();
+        }
     }
 }
 

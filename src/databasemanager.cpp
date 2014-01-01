@@ -33,6 +33,7 @@
 #include <QStandardPaths>
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
+    notes = new NoteList();
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     qDebug() << "Data path: " << dataPath;
     createDataDir(dataPath);
@@ -52,6 +53,7 @@ DatabaseManager::~DatabaseManager() {
     if(db.isOpen()) {
         db.close();
     }
+    delete(notes);
 }
 
 void DatabaseManager::createDataDir(const QString dataPath) {
@@ -97,16 +99,24 @@ bool DatabaseManager::isDbOpen() {
 }
 
 void DatabaseManager::getNotes() {
-    QSqlQuery query(db);
-    query.exec("SELECT OID, remote_id, title, note FROM notes;");
-    list.clearNotes();
+    notes->clearNotes();
+    qDebug() << "Getting notes from DB";
 
-    while(query.nextResult()) {
+    QSqlQuery query(db);
+    bool success = query.exec("SELECT OID, remote_id, title, note FROM notes;");
+
+    if(!success) {
+        qDebug() << "Query failed: " << query.lastError();
+    }
+
+    while(query.next()) {
         Note *note = new Note();
         note->setRowId(query.value(0).toDouble());
         note->setRemoteId(query.value(1).toDouble());
         note->setTitle(query.value(2).toString());
+        qDebug() << "Adding note with title: " << query.value(2).toString();
         note->setBody(query.value(3).toString());
-        list.addNote(note);
+        qDebug() << "Adding note with body: " << query.value(3).toString();
+        notes->addNote(note);
     }
 }
