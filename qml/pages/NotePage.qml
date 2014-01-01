@@ -51,8 +51,8 @@ Page {
                 spacing: 20
 
                 Label {
-                     color: theme.highlightColor
-                     font.family: theme.fontFamilyHeading
+                     color: Theme.highlightColor
+                     font.family: Theme.fontFamilyHeading
                      text: "Title:"
                  }
 
@@ -64,8 +64,8 @@ Page {
                  }
 
                 Label {
-                     color: theme.highlightColor
-                     font.family: theme.fontFamilyHeading
+                     color: Theme.highlightColor
+                     font.family: Theme.fontFamilyHeading
                      text: "Note:"
                  }
 
