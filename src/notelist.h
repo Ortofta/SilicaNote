@@ -39,7 +39,7 @@
 class NoteList : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<Note> notes READ notes NOTIFY notesChanged)
+    Q_PROPERTY(QQmlListProperty<Note> notelist READ notes NOTIFY notesChanged)
 private:
     QList<Note *> _notes;
 public:

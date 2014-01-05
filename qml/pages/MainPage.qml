@@ -32,25 +32,34 @@ import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import org.silicanote.DBManager 1.0
-import org.silicanote.notelist 1.0
+import org.silicanote.notelist.note 1.0
 
 Page {
     id:mainpage
 
-    ListModel {
-        id: notes
-    }
+
 
     SilicaListView {
+        id:listView
         width: mainpage.width
         height: mainpage.height
         anchors.top: parent.top
-        model: notes
+        model: DBManager.notes
         header: PageHeader { title: "SilicaNote" }
-        ViewPlaceholder {
-            id: test
-            enabled: notes.count == 0
-            text: qsTr("You have no notes")
+        //ViewPlaceholder {
+        //    id: test
+        //    enabled:  0 == 0
+        //    text: qsTr("You have no notes")
+        //}
+        delegate: ListItem {
+            id: listItem
+            width: ListView.view.width
+            height: Theme.itemSizeSmall
+            Label {
+                id: label
+                text: "mupp"
+                color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+            }
         }
         PullDownMenu {
             MenuItem {

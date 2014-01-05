@@ -38,22 +38,33 @@
 #include <QQmlEngine>
 #include <QJSEngine>
 #include "note.h"
-#include "notelist.h"
 
 class DatabaseManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QQmlListProperty<Note> notes READ notes NOTIFY notesChanged)
     QSqlDatabase db;
-    NoteList* notes;
+    QList<Note *> _notes;
     bool isDbOpen();
     void createDataDir(const QString dataPath);
 
 public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
+    QQmlListProperty<Note> notes();
+    Q_INVOKABLE void addNote(Note *note);
+    Q_INVOKABLE void deleteNote(int index);
+    Q_INVOKABLE int countNotes();
+    Q_INVOKABLE void clearNotes();
+    Q_INVOKABLE Note* noteAt(int index);
+
+    static void append(QQmlListProperty<Note> *property, Note* value);
+    static void clear(QQmlListProperty<Note> *property);
+    static int size(QQmlListProperty<Note> *property);
+    static Note* at(QQmlListProperty<Note> *property, int index);
 
 signals:
-
+    void notesChanged();
 public slots:
     double storeNote(const QString title, const QString body);
     void getNotes();

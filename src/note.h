@@ -40,6 +40,8 @@ class Note : public QObject
     double _remote_id;
     QString _title;
     QString _body;
+    Q_PROPERTY(QString title READ getTitle WRITE setTitle)
+    Q_PROPERTY(QString body READ getBody WRITE setBody)
 public:
     explicit Note(QObject *parent = 0);
     void setRowId(double rowId);
@@ -48,7 +50,7 @@ public:
     double getRemoteId();
     void setTitle(const QString title);
     QString getTitle();
-    void setBody(const QString body);
+    void setBody(const QString bodyToSet);
     QString getBody();
 signals:
 

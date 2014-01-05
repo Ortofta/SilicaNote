@@ -54,8 +54,7 @@ int main(int argc, char *argv[])
     ServerCommunicator communicator;
     engine.rootContext()->setContextProperty("communicator", &communicator);
     qmlRegisterSingletonType<DatabaseManager>("org.silicanote.DBManager", 1, 0, "DBManager", databaseManagerProvider);
-    qmlRegisterType<Note>("org.silicanote.note", 1, 0, "Note");
-    qmlRegisterType<NoteList>("org.silicanote.notelist", 1, 0, "NoteList");
+    qmlRegisterType<Note>("org.silicanote.notelist.note", 1, 0, "Note");
     QQuickView *view = SailfishApp::createView();
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();
