@@ -37,14 +37,15 @@ import org.silicanote.notelist.note 1.0
 Page {
     id:mainpage
 
-
-
     SilicaListView {
         id:listView
         width: mainpage.width
         height: mainpage.height
         anchors.top: parent.top
-        model: DBManager.notes
+        model: ListModel {
+            ListElement { fruit: "jackfruit" }
+        }
+            //DBManager.notes
         header: PageHeader { title: "SilicaNote" }
         //ViewPlaceholder {
         //    id: test
@@ -57,7 +58,7 @@ Page {
             height: Theme.itemSizeSmall
             Label {
                 id: label
-                text: "mupp"
+                text: fruit
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
         }
@@ -77,6 +78,8 @@ Page {
         }
         Component.onCompleted: {
             DBManager.getNotes();
+            listView.model=DBManager.notes;
+            //console.log("Notes lenght: ", DBManager.notes.count);
         }
     }
 }
