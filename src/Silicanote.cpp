@@ -61,11 +61,10 @@ int main(int argc, char *argv[])
     DatabaseManager dbManager;
     dbManager.getNotes();
     engine.rootContext()->setContextProperty("dbManager", &dbManager);
-    engine.rootContext()->setContextProperty("noteModel", QVariant::fromValue(dbManager.getNoteList()));
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);
-    view->rootContext()->setContextProperty("noteModel", QVariant::fromValue(dbManager.getNoteList()));
+    view->rootContext()->setContextProperty("noteModel", dbManager.getModel());
 
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();

@@ -35,6 +35,11 @@ Note::Note(QObject *parent) :
 {
 }
 
+Note::Note(const QString &title, const QString &body) {
+    _title = title;
+    _body = body;
+}
+
 void Note::setRowId(double rowId) {
     _row_id = rowId;
 }

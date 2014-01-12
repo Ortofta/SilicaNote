@@ -55,7 +55,7 @@ Page {
             height: Theme.itemSizeSmall
             Label {
                 id: label
-                text: model.modelData.title
+                text: title
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
         }

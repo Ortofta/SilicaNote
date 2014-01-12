@@ -34,6 +34,7 @@
 #include <QStandardPaths>
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
+    _noteModel = new NoteModel();
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     qDebug() << "Data path: " << dataPath;
     createDataDir(dataPath);
@@ -53,6 +54,7 @@ DatabaseManager::~DatabaseManager() {
     if(db.isOpen()) {
         db.close();
     }
+    delete(_noteModel);
 }
 
 void DatabaseManager::createDataDir(const QString dataPath) {
@@ -97,11 +99,6 @@ bool DatabaseManager::isDbOpen() {
     return true;
 }
 
-QList<Note*> DatabaseManager::getNoteList() {
-    qDebug() << "Getting note list - list lenght:" << _notes.length();
-    return _notes;
-}
-
 void DatabaseManager::getNotes() {
     clearNotes();
     qDebug() << "Getting notes from DB";
@@ -121,63 +118,17 @@ void DatabaseManager::getNotes() {
         qDebug() << "Adding note with title: " << query.value(2).toString();
         note->setBody(query.value(3).toString());
         qDebug() << "Adding note with body: " << query.value(3).toString();
-        addNote(note);
+        _noteModel->addNote(note);
     }
 }
 
-QQmlListProperty<Note> DatabaseManager::notes() {
-    qDebug() << "Reading note list property - list lenght:" << _notes.length();
-    return QQmlListProperty<Note>(this, &_notes, &append, &size, &at, &clear);
-}
-
-void DatabaseManager::addNote(Note *note) {
-    qDebug() << "Adding note to list";
-    _notes.append(note);
-    this->notesChanged();
-}
-
-void DatabaseManager::deleteNote(int index) {
-    //qDebug() << "Removing note at index " << index;
-    _notes.removeAt(index);
-    this->notesChanged();
+NoteModel *DatabaseManager::getModel() {
+    return _noteModel;
 }
 
 void DatabaseManager::clearNotes() {
-    //qDebug() << "Clearing note list";
-    _notes.clear();
-    this->notesChanged();
+    _noteModel->clearModel();
 }
 
-int DatabaseManager::countNotes() {
-    //qDebug() << "Reading note list property lenght:" << _notes.length();
-    return _notes.length();
-}
-
-Note* DatabaseManager::noteAt(int index) {
-    //qDebug() << "Reading note at index " << index;
-    return _notes.at(index);
-}
-
-void DatabaseManager::append(QQmlListProperty<Note> *property, Note* value) {
-    DatabaseManager *list = (DatabaseManager*) property;
-    list->addNote(value);
-    list->notesChanged();
-}
-
-void DatabaseManager::clear(QQmlListProperty<Note> *property) {
-    DatabaseManager *list = (DatabaseManager*) property;
-    list->clearNotes();
-    list->notesChanged();
-}
-
-int DatabaseManager::size(QQmlListProperty<Note> *property) {
-    DatabaseManager *list = (DatabaseManager*) property;
-    return list->countNotes();
-}
-
-Note* DatabaseManager::at(QQmlListProperty<Note> *property, int index) {
-    DatabaseManager *list = (DatabaseManager*) property;
-    return list->noteAt(index);
-}
 
 
