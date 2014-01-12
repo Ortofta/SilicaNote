@@ -97,6 +97,11 @@ bool DatabaseManager::isDbOpen() {
     return true;
 }
 
+QList<Note*> DatabaseManager::getNoteList() {
+    qDebug() << "Getting note list - list lenght:" << _notes.length();
+    return _notes;
+}
+
 void DatabaseManager::getNotes() {
     clearNotes();
     qDebug() << "Getting notes from DB";

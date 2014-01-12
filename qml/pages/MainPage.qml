@@ -31,7 +31,6 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
-import org.silicanote.DBManager 1.0
 import org.silicanote.notelist.note 1.0
 
 Page {
@@ -42,9 +41,7 @@ Page {
         width: mainpage.width
         height: mainpage.height
         anchors.top: parent.top
-        model: ListModel {
-            ListElement { fruit: "jackfruit" }
-        }
+        model:noteModel
             //DBManager.notes
         header: PageHeader { title: "SilicaNote" }
         //ViewPlaceholder {
@@ -58,7 +55,7 @@ Page {
             height: Theme.itemSizeSmall
             Label {
                 id: label
-                text: fruit
+                text: model.modelData.title
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
         }
@@ -75,11 +72,6 @@ Page {
                 text: "Sync"
                 //onClicked: pageStack.push(Qt.resolvedUrl("Todo.qml"),{dataContainer: root})
             }
-        }
-        Component.onCompleted: {
-            DBManager.getNotes();
-            listView.model=DBManager.notes;
-            //console.log("Notes lenght: ", DBManager.notes.count);
         }
     }
 }

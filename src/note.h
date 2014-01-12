@@ -40,18 +40,18 @@ class Note : public QObject
     double _remote_id;
     QString _title;
     QString _body;
+public:
     Q_PROPERTY(QString title READ getTitle WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString body READ getBody WRITE setBody NOTIFY bodyChanged)
-public:
     explicit Note(QObject *parent = 0);
-    void setRowId(double rowId);
-    double getRowId();
-    void setRemoteId(double remoteId);
-    double getRemoteId();
-    void setTitle(const QString title);
-    QString getTitle();
-    void setBody(const QString bodyToSet);
-    QString getBody();
+    Q_INVOKABLE void setRowId(double rowId);
+    Q_INVOKABLE double getRowId();
+    Q_INVOKABLE void setRemoteId(double remoteId);
+    Q_INVOKABLE double getRemoteId();
+    Q_INVOKABLE void setTitle(const QString title);
+    Q_INVOKABLE QString getTitle();
+    Q_INVOKABLE void setBody(const QString bodyToSet);
+    Q_INVOKABLE QString getBody();
 signals:
     void titleChanged();
     void bodyChanged();

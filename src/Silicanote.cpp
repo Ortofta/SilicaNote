@@ -51,11 +51,22 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQmlEngine engine;
+
+    //qmlRegisterSingletonType<DatabaseManager>("org.silicanote.DBManager", 1, 0, "DBManager", databaseManagerProvider);
+    qmlRegisterType<Note>("org.silicanote.notelist.note", 1, 0, "Note");
+
     ServerCommunicator communicator;
     engine.rootContext()->setContextProperty("communicator", &communicator);
-    qmlRegisterSingletonType<DatabaseManager>("org.silicanote.DBManager", 1, 0, "DBManager", databaseManagerProvider);
-    qmlRegisterType<Note>("org.silicanote.notelist.note", 1, 0, "Note");
+
+    DatabaseManager dbManager;
+    dbManager.getNotes();
+    engine.rootContext()->setContextProperty("dbManager", &dbManager);
+    engine.rootContext()->setContextProperty("noteModel", QVariant::fromValue(dbManager.getNoteList()));
+
     QQuickView *view = SailfishApp::createView();
+    view->rootContext()->setContextProperty("dbManager", &dbManager);
+    view->rootContext()->setContextProperty("noteModel", QVariant::fromValue(dbManager.getNoteList()));
+
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();
     return app->exec();

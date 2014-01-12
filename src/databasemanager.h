@@ -58,6 +58,8 @@ public:
     Q_INVOKABLE void clearNotes();
     Q_INVOKABLE Note* noteAt(int index);
 
+    QList<Note *> getNoteList();
+
     static void append(QQmlListProperty<Note> *property, Note* value);
     static void clear(QQmlListProperty<Note> *property);
     static int size(QQmlListProperty<Note> *property);
