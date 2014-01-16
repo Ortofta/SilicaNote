@@ -37,7 +37,6 @@
 #include "servercommunicator.h"
 #include "databasemanager.h"
 #include "note.h"
-#include "notelist.h"
 
 int main(int argc, char *argv[])
 {
