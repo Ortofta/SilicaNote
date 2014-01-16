@@ -31,9 +31,6 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
-import org.silicanote.DBManager 1.0
-
-import "storage.js" as Storage
 
 Page {
     id: notepage
@@ -79,7 +76,7 @@ Page {
                 Button {
                     text: "Save"
                     onClicked: {
-                        DBManager.storeNote(notetitle.text, notetext.text);
+                        dbManager.storeNote(notetitle.text, notetext.text);
                         console.log("PageStack depth: " + pageStack.depth)
                         pageStack.pop();
                     }
