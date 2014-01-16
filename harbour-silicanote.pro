@@ -27,7 +27,8 @@ OTHER_FILES += qml/Silicanote.qml \
     qml/pages/NotePage.qml \
     qml/pages/MainPage.qml \
     rpm/harbour-silicanote.yaml \
-    harbour-silicanote.desktop
+    harbour-silicanote.desktop \
+    qml/pages/About.qml
 
 HEADERS += \
     src/servercommunicator.h \

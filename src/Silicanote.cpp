@@ -51,7 +51,6 @@ int main(int argc, char *argv[])
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQmlEngine engine;
 
-    //qmlRegisterSingletonType<DatabaseManager>("org.silicanote.DBManager", 1, 0, "DBManager", databaseManagerProvider);
     qmlRegisterType<Note>("org.silicanote.notelist.note", 1, 0, "Note");
 
     ServerCommunicator communicator;

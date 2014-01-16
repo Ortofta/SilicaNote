@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2013 Markus Svensson.
+  Copyright (C) 2013-2014 Markus Svensson.
   Contact: Markus Svensson <markus.svensson@me.com>
   All rights reserved.
 
@@ -30,47 +30,20 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import org.silicanote.notelist.note 1.0
 
 Page {
-    id:mainpage
-
-    SilicaListView {
-        id:listView
-        width: mainpage.width
-        height: mainpage.height
-        anchors.top: parent.top
-        model:noteModel
-        header: PageHeader { title: "SilicaNote" }
-        ViewPlaceholder {
-            id: test
-            enabled:  noteModel.count() === 0
-            text: qsTr("You have no notes")
-        }
-        delegate: ListItem {
-            id: listItem
-            width: ListView.view.width
-            height: Theme.itemSizeSmall
-            Label {
-                id: label
-                text: title
-                color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
-            }
-        }
-        PullDownMenu {
-            MenuItem {
-                text: "About"
-                onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
-            }
-            MenuItem {
-                text: "Sync"
-                //onClicked: pageStack.push(Qt.resolvedUrl("Todo.qml"),{dataContainer: root})
-            }
-            MenuItem {
-                text: "Add Note"
-                onClicked: pageStack.push(Qt.resolvedUrl("NotePage.qml"))
-            }
-        }
+    id: aboutpage
+    Text {
+        id: text
+        height: aboutpage.height
+        width: aboutpage.width
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font.pixelSize: Theme.fontSizeSmall
+        color: Theme.primaryColor
+        textFormat: Text.StyledText
+        text: "SilicaNote 0.1<br>
+              Released under the BSD license<br>
+              <a href='http://www.silicanote.eu'>www.silicanote.eu</a>"
     }
 }
-
