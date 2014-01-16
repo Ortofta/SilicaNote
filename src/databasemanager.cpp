@@ -87,6 +87,7 @@ double DatabaseManager::storeNote(QString title, QString body) {
         qDebug() << "Query failed: " << query.lastError();
     }
 
+    _noteModel->addNote(new Note(title, body));
     query.first();
     return query.value(0).toDouble();
 }

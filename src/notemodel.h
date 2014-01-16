@@ -15,6 +15,8 @@ public:
     QHash<int, QByteArray> roleNames() const;
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
+    bool insertRows(int position, int rows, const QModelIndex &parent);
+    bool removeRows(int position, int rows, const QModelIndex &parent);
     void addNote(Note *note);
     void clearModel();
 
@@ -22,6 +24,8 @@ public:
             TitleRole = Qt::UserRole + 1,
             BodyRole
     };
+
+
 
 signals:
 
