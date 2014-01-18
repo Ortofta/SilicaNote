@@ -88,3 +88,8 @@ QByteArray ServerCommunicator::toJson(const QString id, const QString header, co
     return document.toJson();
 }
 
+QList<Note*> ServerCommunicator::fromJson(QString json) {
+    QList<Note*> list;
+
+    return list;
+}
