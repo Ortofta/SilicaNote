@@ -32,6 +32,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkRequest>
+#include <QNetworkReply>
 
 /**
  * Constructor - setup everything needed by the class
@@ -58,11 +59,23 @@ ServerCommunicator::~ServerCommunicator() {
  * @param header
  * @param body
  */
-void ServerCommunicator::syncNote(const QString id, const QString header, const QString body) {
+bool ServerCommunicator::syncNote(const QString id, const QString header, const QString body) {
     QByteArray data = toJson(id, header, body);
     QNetworkRequest request;
-    request.setUrl(QUrl("http://www.google.com"));
-    manager->post(request, data);
+    request.setUrl(QUrl("http://sync.silicanote.eu"));
+    QNetworkReply *reply = manager->post(request, data);
+
+    if(reply->error() == QNetworkReply::NoError) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+QList<Note*> ServerCommunicator::fetchNotes() {
+    QList<Note*> list;
+
+    return list;
 }
 
 QByteArray ServerCommunicator::toJson(const QString id, const QString header, const QString body) {

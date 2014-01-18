@@ -33,20 +33,23 @@
 
 #include <QObject>
 #include <QNetworkAccessManager>
+#include <QList>
+#include "note.h"
 
 class ServerCommunicator : public QObject
 {
     Q_OBJECT
     QNetworkAccessManager *manager;
-
     QByteArray toJson(const QString id, const QString header, const QString body);
+    QList<Note*> fromJson(QString json);
 public:
     explicit ServerCommunicator(QObject *parent = 0);
     ~ServerCommunicator();
 signals:
 
 public slots:
-    void syncNote(const QString id, const QString header, const QString body);
+    bool syncNote(const QString id, const QString header, const QString body);
+    QList<Note*> fetchNotes();
 };
 
 #endif // SERVERCOMMUNICATOR_H
