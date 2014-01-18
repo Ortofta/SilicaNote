@@ -59,10 +59,10 @@ ServerCommunicator::~ServerCommunicator() {
  * @param header
  * @param body
  */
-bool ServerCommunicator::syncNote(const QString id, const QString header, const QString body) {
-    QByteArray data = toJson(id, header, body);
+bool ServerCommunicator::syncNote(Note *note) {
+    QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
     QNetworkRequest request;
-    request.setUrl(QUrl("http://sync.silicanote.eu"));
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
     QNetworkReply *reply = manager->post(request, data);
 
     if(reply->error() == QNetworkReply::NoError) {
@@ -74,11 +74,17 @@ bool ServerCommunicator::syncNote(const QString id, const QString header, const 
 
 QList<Note*> ServerCommunicator::fetchNotes() {
     QList<Note*> list;
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/getnotes"));
+    QNetworkReply *reply = manager->get(request);
+    if(reply->error() == QNetworkReply::NoError) {
 
-    return list;
+    } else {
+        return list;
+    }
 }
 
-QByteArray ServerCommunicator::toJson(const QString id, const QString header, const QString body) {
+QByteArray ServerCommunicator::toJson(const double id, const QString header, const QString body) {
     QJsonObject obj;
     obj.insert("id", id);
     obj.insert("header", header);

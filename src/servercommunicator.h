@@ -40,7 +40,7 @@ class ServerCommunicator : public QObject
 {
     Q_OBJECT
     QNetworkAccessManager *manager;
-    QByteArray toJson(const QString id, const QString header, const QString body);
+    QByteArray toJson(const double id, const QString header, const QString body);
     QList<Note*> fromJson(QString json);
 public:
     explicit ServerCommunicator(QObject *parent = 0);
@@ -48,7 +48,7 @@ public:
 signals:
 
 public slots:
-    bool syncNote(const QString id, const QString header, const QString body);
+    bool syncNote(Note *note);
     QList<Note*> fetchNotes();
 };
 
