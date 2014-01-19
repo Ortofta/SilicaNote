@@ -50,6 +50,8 @@ signals:
 public slots:
     bool syncNote(Note *note);
     QList<Note*> fetchNotes();
+    Note* fetchNote(double id);
+    bool deleteNote(double id);
 };
 
 #endif // SERVERCOMMUNICATOR_H

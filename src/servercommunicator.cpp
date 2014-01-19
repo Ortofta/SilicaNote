@@ -62,7 +62,7 @@ ServerCommunicator::~ServerCommunicator() {
 bool ServerCommunicator::syncNote(Note *note) {
     QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
     QNetworkRequest request;
-    request.setUrl(QUrl("insert host here"));
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QNetworkReply *reply = manager->post(request, data);
 
@@ -76,12 +76,30 @@ bool ServerCommunicator::syncNote(Note *note) {
 QList<Note*> ServerCommunicator::fetchNotes() {
     QList<Note*> list;
     QNetworkRequest request;
-    request.setUrl(QUrl("insert host here"));
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/getnotes"));
     QNetworkReply *reply = manager->get(request);
     if(reply->error() == QNetworkReply::NoError) {
 
     } else {
         return list;
+    }
+}
+
+Note* ServerCommunicator::fetchNote(double id) {
+
+}
+
+bool ServerCommunicator::deleteNote(double id) {
+    QNetworkRequest request;
+    QString url = "http://sync.silicanote.eu/services/notes/deletenote/";
+    url.append(QString::number(id));
+    request.setUrl(QUrl(url));
+    QNetworkReply *reply = manager->deleteResource(request);
+
+    if(reply->error() == QNetworkReply::NoError) {
+        return true;
+    } else {
+        return false;
     }
 }
 
