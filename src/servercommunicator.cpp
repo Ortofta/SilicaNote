@@ -62,7 +62,7 @@ ServerCommunicator::~ServerCommunicator() {
 bool ServerCommunicator::syncNote(Note *note) {
     QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
     QNetworkRequest request;
-    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
+    request.setUrl(QUrl("insert host here"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QNetworkReply *reply = manager->post(request, data);
 
