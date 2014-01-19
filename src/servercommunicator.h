@@ -41,7 +41,7 @@ class ServerCommunicator : public QObject
     Q_OBJECT
     QNetworkAccessManager *manager;
     QByteArray toJson(const double id, const QString header, const QString body);
-    Note* fromJson(QString json);
+    Note* fromJson(QByteArray json);
 public:
     explicit ServerCommunicator(QObject *parent = 0);
     ~ServerCommunicator();

@@ -31,6 +31,7 @@
 #include "servercommunicator.h"
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
@@ -119,6 +120,7 @@ void ServerCommunicator::requestFinished(QNetworkReply *reply) {
         if(data.length() == 0) {
             return;
         }
+
     }
 
     reply->deleteLater();
@@ -134,6 +136,20 @@ QByteArray ServerCommunicator::toJson(const double id, const QString header, con
     return document.toJson();
 }
 
-Note* ServerCommunicator::fromJson(QString json) {
+Note* ServerCommunicator::fromJson(QByteArray json) {
+    QJsonDocument document = QJsonDocument::fromJson(json);
+    // handle an array of notes
+    if(document.isArray()) {
+        QJsonArray array = document.array();
+        for(int i = 0; i < array.size(); i++) {
+           QJsonValue value = array.at(i);
+           if(value.isObject()) {
+               QJsonObject obj = value.toObject();
+               Note *note = new Note(obj.value("heading").toString(), obj.value("body").toString());
+               note->setRemoteId(obj.value("id").toDouble());
+           }
+        }
+    } else {
 
+    }
 }
