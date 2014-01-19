@@ -56,6 +56,12 @@ Page {
                 text: title
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("NotePage.qml"))
+                }
+            }
         }
         PullDownMenu {
             MenuItem {

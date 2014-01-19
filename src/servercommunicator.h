@@ -41,17 +41,17 @@ class ServerCommunicator : public QObject
     Q_OBJECT
     QNetworkAccessManager *manager;
     QByteArray toJson(const double id, const QString header, const QString body);
-    Note* fromJson(QByteArray json);
+    QList<Note*> fromJson(QByteArray json);
 public:
     explicit ServerCommunicator(QObject *parent = 0);
     ~ServerCommunicator();
 signals:
     void noteFetched(Note* note);
 public slots:
-    bool syncNote(Note *note);
-    QList<Note*> fetchNotes();
-    Note* fetchNote(double id);
-    bool deleteNote(double id);
+    void syncNote(Note *note);
+    void fetchNotes();
+    void fetchNote(double id);
+    void deleteNote(double id);
     void requestFinished(QNetworkReply*);
 };
 

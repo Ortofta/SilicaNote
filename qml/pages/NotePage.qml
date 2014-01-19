@@ -47,36 +47,36 @@ Page {
                 spacing: 20
 
                 Label {
-                     color: Theme.highlightColor
-                     font.family: Theme.fontFamilyHeading
-                     text: "Title:"
+                    color: Theme.highlightColor
+                    font.family: Theme.fontFamilyHeading
+                    text: "Title:"
                  }
 
                 TextField {
                     id: notetitle
-                     width: 480
-                     height: 30
-                     placeholderText: "Note title"
+                    width: 480
+                    height: 30
+                    placeholderText: "Note title"
                  }
 
                 Label {
-                     color: Theme.highlightColor
-                     font.family: Theme.fontFamilyHeading
-                     text: "Note:"
+                    id: notelabel
+                    color: Theme.highlightColor
+                    font.family: Theme.fontFamilyHeading
+                    text: "Note:"
                  }
 
                 TextArea {
                     id: notetext
                     width: 480
                     height: 300
-                     placeholderText: "Enter text here!"
+                    placeholderText: "Enter text here!"
                 }
 
                 Button {
                     text: "Save"
                     onClicked: {
                         dbManager.storeNote(notetitle.text, notetext.text);
-                        console.log("PageStack depth: " + pageStack.depth)
                         pageStack.pop();
                     }
                 }

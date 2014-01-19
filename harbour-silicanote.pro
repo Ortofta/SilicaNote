@@ -23,7 +23,6 @@ SOURCES += src/Silicanote.cpp \
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
     rpm/Silicanote.spec \
-    qml/pages/storage.js \
     qml/pages/NotePage.qml \
     qml/pages/MainPage.qml \
     rpm/harbour-silicanote.yaml \

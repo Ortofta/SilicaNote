@@ -28,12 +28,12 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "servercommunicator.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include "servercommunicator.h"
 
 /**
  * Constructor - setup everything needed by the class
@@ -63,57 +63,53 @@ ServerCommunicator::~ServerCommunicator() {
  * @param header
  * @param body
  */
-bool ServerCommunicator::syncNote(Note *note) {
+void ServerCommunicator::syncNote(Note *note) {
     QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
     QNetworkRequest request;
     request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    QNetworkReply *reply = manager->post(request, data);
-
-    if(reply->error() == QNetworkReply::NoError) {
-        return true;
-    } else {
-        return false;
-    }
+    manager->post(request, data);
 }
 
-QList<Note*> ServerCommunicator::fetchNotes() {
-    QList<Note*> list;
+/**
+ * @brief ServerCommunicator::fetchNotes
+ */
+void ServerCommunicator::fetchNotes() {
     QNetworkRequest request;
     request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/getnotes"));
-    QNetworkReply *reply = manager->get(request);
-    if(reply->error() == QNetworkReply::NoError) {
-
-    } else {
-        return list;
-    }
+    manager->get(request);
 }
 
-Note* ServerCommunicator::fetchNote(double id) {
+/**
+ * @brief ServerCommunicator::fetchNote
+ * @param id
+ * @return
+ */
+void ServerCommunicator::fetchNote(double id) {
     QNetworkRequest request;
     QString url = "http://sync.silicanote.eu/services/notes/getnote/";
     url.append(QString::number(id));
     request.setUrl(QUrl(url));
-    QNetworkReply *reply = manager->get(request);
-    if(reply->error() == QNetworkReply::NoError) {
-    } else {
-        return NULL;
-    }
+    manager->get(request);
 }
 
-bool ServerCommunicator::deleteNote(double id) {
+/**
+ * @brief ServerCommunicator::deleteNote
+ * @param id
+ * @return
+ */
+void ServerCommunicator::deleteNote(double id) {
     QNetworkRequest request;
     QString url = "http://sync.silicanote.eu/services/notes/deletenote/";
     url.append(QString::number(id));
     request.setUrl(QUrl(url));
-    QNetworkReply *reply = manager->deleteResource(request);
-    if(reply->error() == QNetworkReply::NoError) {
-        return true;
-    } else {
-        return false;
-    }
+    manager->deleteResource(request);
 }
 
+/**
+ * @brief ServerCommunicator::requestFinished
+ * @param reply
+ */
 void ServerCommunicator::requestFinished(QNetworkReply *reply) {
     if(reply->operation() == QNetworkAccessManager::GetOperation) {
         QByteArray data = reply->readAll();
@@ -121,6 +117,10 @@ void ServerCommunicator::requestFinished(QNetworkReply *reply) {
             return;
         }
 
+        QList<Note*> notes = fromJson(data);
+        for(int i = 0; i < notes.length(); i++) {
+            emit noteFetched(notes.at(i));
+        }
     }
 
     reply->deleteLater();
@@ -136,8 +136,9 @@ QByteArray ServerCommunicator::toJson(const double id, const QString header, con
     return document.toJson();
 }
 
-Note* ServerCommunicator::fromJson(QByteArray json) {
+QList<Note*> ServerCommunicator::fromJson(QByteArray json) {
     QJsonDocument document = QJsonDocument::fromJson(json);
+    QList<Note*> notes;
     // handle an array of notes
     if(document.isArray()) {
         QJsonArray array = document.array();
@@ -147,9 +148,15 @@ Note* ServerCommunicator::fromJson(QByteArray json) {
                QJsonObject obj = value.toObject();
                Note *note = new Note(obj.value("heading").toString(), obj.value("body").toString());
                note->setRemoteId(obj.value("id").toDouble());
+               notes.append(note);
            }
         }
     } else {
-
+        QJsonObject obj = document.object();
+        Note *note = new Note(obj.value("heading").toString(), obj.value("body").toString());
+        note->setRemoteId(obj.value("id").toDouble());
+        notes.append(note);
     }
+
+    return notes;
 }
