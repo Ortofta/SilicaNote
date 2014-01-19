@@ -63,6 +63,9 @@ int main(int argc, char *argv[])
     QObject::connect(&dbManager, SIGNAL(noteStored(Note*)),
                           &communicator, SLOT(syncNote(Note*)));
 
+    QObject::connect(&communicator, SIGNAL(noteFetched(Note*)),
+                          &dbManager, SIGNAL(updateNote(Note*)));
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);
     view->rootContext()->setContextProperty("noteModel", dbManager.getModel());

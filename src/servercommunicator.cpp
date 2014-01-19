@@ -43,6 +43,9 @@ ServerCommunicator::ServerCommunicator(QObject *parent) :
     QObject(parent)
 {
     manager = new QNetworkAccessManager(this);
+    QObject::connect(manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(requestFinished(QNetworkReply*)));
+
 }
 
 /**
@@ -86,7 +89,15 @@ QList<Note*> ServerCommunicator::fetchNotes() {
 }
 
 Note* ServerCommunicator::fetchNote(double id) {
-
+    QNetworkRequest request;
+    QString url = "http://sync.silicanote.eu/services/notes/getnote/";
+    url.append(QString::number(id));
+    request.setUrl(QUrl(url));
+    QNetworkReply *reply = manager->get(request);
+    if(reply->error() == QNetworkReply::NoError) {
+    } else {
+        return NULL;
+    }
 }
 
 bool ServerCommunicator::deleteNote(double id) {
@@ -95,12 +106,22 @@ bool ServerCommunicator::deleteNote(double id) {
     url.append(QString::number(id));
     request.setUrl(QUrl(url));
     QNetworkReply *reply = manager->deleteResource(request);
-
     if(reply->error() == QNetworkReply::NoError) {
         return true;
     } else {
         return false;
     }
+}
+
+void ServerCommunicator::requestFinished(QNetworkReply *reply) {
+    if(reply->operation() == QNetworkAccessManager::GetOperation) {
+        QByteArray data = reply->readAll();
+        if(data.length() == 0) {
+            return;
+        }
+    }
+
+    reply->deleteLater();
 }
 
 QByteArray ServerCommunicator::toJson(const double id, const QString header, const QString body) {
@@ -113,8 +134,6 @@ QByteArray ServerCommunicator::toJson(const double id, const QString header, con
     return document.toJson();
 }
 
-QList<Note*> ServerCommunicator::fromJson(QString json) {
-    QList<Note*> list;
+Note* ServerCommunicator::fromJson(QString json) {
 
-    return list;
 }

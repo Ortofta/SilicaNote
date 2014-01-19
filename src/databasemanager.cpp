@@ -95,6 +95,10 @@ double DatabaseManager::storeNote(QString title, QString body) {
     return note->getRowId();
 }
 
+void DatabaseManager::updateNote(Note *note) {
+
+}
+
 bool DatabaseManager::isDbOpen() {
     if(!db.isOpen()) {
         return false;
