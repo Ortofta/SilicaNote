@@ -59,7 +59,7 @@ Page {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NotePage.qml"))
+                    pageStack.push(Qt.resolvedUrl("NotePage.qml"), {noteTitle:title,noteBody:body})
                 }
             }
         }

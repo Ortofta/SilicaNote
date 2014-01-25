@@ -38,6 +38,7 @@ Page {
         title: "Create Note"
     }
     SilicaFlickable {
+        id: flickable
         anchors.fill: parent
         anchors.topMargin: 150
             contentHeight: column.height
