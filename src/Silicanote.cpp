@@ -64,11 +64,15 @@ int main(int argc, char *argv[])
     SyncManager syncManager;
     syncManager.setDbManager(&dbManager);
 
+    // Hook up slots and signals
     QObject::connect(&dbManager, SIGNAL(noteStored(Note*)),
-                          &communicator, SLOT(syncNote(Note*)));
-
+                     &communicator, SLOT(syncNote(Note*)));
     QObject::connect(&communicator, SIGNAL(noteFetched(Note*)),
-                          &dbManager, SIGNAL(updateNote(Note*)));
+                     &dbManager, SIGNAL(updateNote(Note*)));
+    QObject::connect(&syncManager, SIGNAL(syncNote(Note*)),
+                     &communicator, SLOT(syncNote(Note*)));
+    QObject::connect(&syncManager, SIGNAL(deleteNote(double)),
+                     &communicator, SLOT(deleteNote(double)));
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);
