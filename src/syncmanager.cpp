@@ -1,13 +1,15 @@
 #include "syncmanager.h"
 
-SyncManager::SyncManager(DatabaseManager *manager, QObject *parent) :
-    QObject(parent)
-{
-    dbManager = manager;
+SyncManager::SyncManager(QObject *parent) : QObject(parent) {
+
 }
 
 SyncManager::~SyncManager() {
     dbManager->deleteLater();
+}
+
+void SyncManager::setDbManager(DatabaseManager *manager){
+    dbManager = manager;
 }
 
 void SyncManager::syncAllNotes() {

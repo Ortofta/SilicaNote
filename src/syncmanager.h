@@ -9,7 +9,8 @@ class SyncManager : public QObject
     Q_OBJECT
     DatabaseManager *dbManager;
 public:
-    explicit SyncManager(DatabaseManager *manager, QObject *parent = 0);
+    explicit SyncManager(QObject *parent = 0);
+    void setDbManager(DatabaseManager *manager);
     ~SyncManager();
 signals:
     void syncedOk();
