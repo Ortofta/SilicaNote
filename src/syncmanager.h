@@ -14,6 +14,8 @@ public:
 signals:
     void syncedOk();
     void syncFailed();
+    void syncNote(Note* note);
+    void deleteNote(double id);
 public slots:
     void syncAllNotes();
     void deleteAllNotes();
