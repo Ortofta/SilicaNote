@@ -53,9 +53,11 @@ public:
     NoteModel *getModel();
 signals:
     void notesChanged();
+    void noteStored(Note *note);
 public slots:
     double storeNote(const QString title, const QString body);
     void getNotes();
+    void updateNote(Note* note);
 };
 
 // Second, define the singleton type provider function (callback).

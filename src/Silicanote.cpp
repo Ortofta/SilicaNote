@@ -36,6 +36,7 @@
 #include <sailfishapp.h>
 #include "servercommunicator.h"
 #include "databasemanager.h"
+#include "syncmanager.h"
 #include "note.h"
 
 int main(int argc, char *argv[])
@@ -60,9 +61,23 @@ int main(int argc, char *argv[])
     dbManager.getNotes();
     engine.rootContext()->setContextProperty("dbManager", &dbManager);
 
+    SyncManager syncManager;
+    syncManager.setDbManager(&dbManager);
+
+    // Hook up slots and signals
+    QObject::connect(&dbManager, SIGNAL(noteStored(Note*)),
+                     &communicator, SLOT(syncNote(Note*)));
+    QObject::connect(&communicator, SIGNAL(noteFetched(Note*)),
+                     &dbManager, SIGNAL(updateNote(Note*)));
+    QObject::connect(&syncManager, SIGNAL(syncNote(Note*)),
+                     &communicator, SLOT(syncNote(Note*)));
+    QObject::connect(&syncManager, SIGNAL(deleteNote(double)),
+                     &communicator, SLOT(deleteNote(double)));
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);
     view->rootContext()->setContextProperty("noteModel", dbManager.getModel());
+    view->rootContext()->setContextProperty("syncManager", &syncManager);
 
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();

@@ -28,59 +28,28 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
+#ifndef SYNCMANAGER_H
+#define SYNCMANAGER_H
 
-Page {
-    id: notepage
+#include <QObject>
+#include "databasemanager.h"
 
-    PageHeader {
-        title: "Create Note"
-    }
-    SilicaFlickable {
-        id: flickable
-        anchors.fill: parent
-        anchors.topMargin: 150
-            contentHeight: column.height
-            Column {
-                id: column
-                width: parent.width
-                spacing: 20
+class SyncManager : public QObject
+{
+    Q_OBJECT
+    DatabaseManager *dbManager;
+public:
+    explicit SyncManager(QObject *parent = 0);
+    void setDbManager(DatabaseManager *manager);
+    ~SyncManager();
+signals:
+    void syncedOk();
+    void syncFailed();
+    void syncNote(Note* note);
+    void deleteNote(double id);
+public slots:
+    void syncAllNotes();
+    void deleteAllNotes();
+};
 
-                Label {
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Title:"
-                 }
-
-                TextField {
-                    id: notetitle
-                    width: 480
-                    height: 30
-                    placeholderText: "Note title"
-                 }
-
-                Label {
-                    id: notelabel
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Note:"
-                 }
-
-                TextArea {
-                    id: notetext
-                    width: 480
-                    height: 300
-                    placeholderText: "Enter text here!"
-                }
-
-                Button {
-                    text: "Save"
-                    onClicked: {
-                        dbManager.storeNote(notetitle.text, notetext.text);
-                        pageStack.pop();
-                    }
-                }
-            }
-    }
-}
+#endif // SYNCMANAGER_H

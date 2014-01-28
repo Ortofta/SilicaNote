@@ -91,6 +91,10 @@ void NoteModel::addNote(Note *note) {
     endInsertRows();
 }
 
+QList<Note *> NoteModel::getNotes() {
+    return _notes;
+}
+
 void NoteModel::clearModel() {
     _notes.clear();
 }

@@ -89,7 +89,14 @@ double DatabaseManager::storeNote(QString title, QString body) {
 
     _noteModel->addNote(new Note(title, body));
     query.first();
-    return query.value(0).toDouble();
+    Note *note = new Note(title, body);
+    note->setRowId(query.value(0).toDouble());
+    emit noteStored(note);
+    return note->getRowId();
+}
+
+void DatabaseManager::updateNote(Note *note) {
+
 }
 
 bool DatabaseManager::isDbOpen() {

@@ -28,10 +28,12 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "servercommunicator.h"
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QNetworkRequest>
+#include <QNetworkReply>
+#include "servercommunicator.h"
 
 /**
  * Constructor - setup everything needed by the class
@@ -42,6 +44,9 @@ ServerCommunicator::ServerCommunicator(QObject *parent) :
     QObject(parent)
 {
     manager = new QNetworkAccessManager(this);
+    QObject::connect(manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(requestFinished(QNetworkReply*)));
+
 }
 
 /**
@@ -58,20 +63,100 @@ ServerCommunicator::~ServerCommunicator() {
  * @param header
  * @param body
  */
-void ServerCommunicator::syncNote(const QString id, const QString header, const QString body) {
-    QByteArray data = toJson(id, header, body);
+void ServerCommunicator::syncNote(Note *note) {
+    QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
     QNetworkRequest request;
-    request.setUrl(QUrl("http://www.google.com"));
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     manager->post(request, data);
 }
 
-QByteArray ServerCommunicator::toJson(const QString id, const QString header, const QString body) {
+/**
+ * @brief ServerCommunicator::fetchNotes
+ */
+void ServerCommunicator::fetchNotes() {
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/getnotes"));
+    manager->get(request);
+}
+
+/**
+ * @brief ServerCommunicator::fetchNote
+ * @param id
+ * @return
+ */
+void ServerCommunicator::fetchNote(double id) {
+    QNetworkRequest request;
+    QString url = "http://sync.silicanote.eu/services/notes/getnote/";
+    url.append(QString::number(id));
+    request.setUrl(QUrl(url));
+    manager->get(request);
+}
+
+/**
+ * @brief ServerCommunicator::deleteNote
+ * @param id
+ * @return
+ */
+void ServerCommunicator::deleteNote(double id) {
+    QNetworkRequest request;
+    QString url = "http://sync.silicanote.eu/services/notes/deletenote/";
+    url.append(QString::number(id));
+    request.setUrl(QUrl(url));
+    manager->deleteResource(request);
+}
+
+/**
+ * @brief ServerCommunicator::requestFinished
+ * @param reply
+ */
+void ServerCommunicator::requestFinished(QNetworkReply *reply) {
+    if(reply->operation() == QNetworkAccessManager::GetOperation) {
+        QByteArray data = reply->readAll();
+        if(data.length() == 0) {
+            return;
+        }
+
+        QList<Note*> notes = fromJson(data);
+        for(int i = 0; i < notes.length(); i++) {
+            emit noteFetched(notes.at(i));
+        }
+    }
+
+    reply->deleteLater();
+}
+
+QByteArray ServerCommunicator::toJson(const double id, const QString header, const QString body) {
     QJsonObject obj;
     obj.insert("id", id);
-    obj.insert("header", header);
+    obj.insert("heading", header);
     obj.insert("body", body);
     QJsonDocument document;
     document.setObject(obj);
     return document.toJson();
 }
 
+QList<Note*> ServerCommunicator::fromJson(QByteArray json) {
+    QJsonDocument document = QJsonDocument::fromJson(json);
+    QList<Note*> notes;
+    // handle an array of notes
+    if(document.isArray()) {
+        QJsonArray array = document.array();
+        for(int i = 0; i < array.size(); i++) {
+           QJsonValue value = array.at(i);
+           if(value.isObject()) {
+               QJsonObject obj = value.toObject();
+               Note *note = new Note(obj.value("heading").toString(), obj.value("body").toString());
+               note->setRemoteId(obj.value("id").toDouble());
+               notes.append(note);
+           }
+        }
+    } else {
+        QJsonObject obj = document.object();
+        Note *note = new Note(obj.value("heading").toString(), obj.value("body").toString());
+        note->setRemoteId(obj.value("id").toDouble());
+        notes.append(note);
+    }
+
+    return notes;
+}

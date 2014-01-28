@@ -18,12 +18,12 @@ SOURCES += src/Silicanote.cpp \
     src/servercommunicator.cpp \
     src/databasemanager.cpp \
     src/note.cpp \
-    src/notemodel.cpp
+    src/notemodel.cpp \
+    src/syncmanager.cpp
 
 OTHER_FILES += qml/Silicanote.qml \
     qml/cover/CoverPage.qml \
     rpm/Silicanote.spec \
-    qml/pages/storage.js \
     qml/pages/NotePage.qml \
     qml/pages/MainPage.qml \
     rpm/harbour-silicanote.yaml \
@@ -34,5 +34,6 @@ HEADERS += \
     src/servercommunicator.h \
     src/databasemanager.h \
     src/note.h \
-    src/notemodel.h
+    src/notemodel.h \
+    src/syncmanager.h
 

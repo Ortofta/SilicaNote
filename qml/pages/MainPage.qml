@@ -56,6 +56,12 @@ Page {
                 text: title
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("NotePage.qml"), {noteTitle:title,noteBody:body})
+                }
+            }
         }
         PullDownMenu {
             MenuItem {
@@ -63,11 +69,14 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
             }
             MenuItem {
-                text: "Sync"
-                //onClicked: pageStack.push(Qt.resolvedUrl("Todo.qml"),{dataContainer: root})
+                text: "Sync All Notes"
+                onClicked:{
+                    syncManager.deleteAllNotes();
+                    syncManager.syncAllNotes();
+                }
             }
             MenuItem {
-                text: "Add Note"
+                text: "New Note"
                 onClicked: pageStack.push(Qt.resolvedUrl("NotePage.qml"))
             }
         }

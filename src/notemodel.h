@@ -49,6 +49,7 @@ public:
     bool removeRows(int position, int rows, const QModelIndex &parent);
     void addNote(Note *note);
     void clearModel();
+    QList<Note *> getNotes();
 
     enum NoteRoles {
             TitleRole = Qt::UserRole + 1,

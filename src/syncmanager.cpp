@@ -28,59 +28,29 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
+#include "syncmanager.h"
 
-Page {
-    id: notepage
+SyncManager::SyncManager(QObject *parent) : QObject(parent) {}
 
-    PageHeader {
-        title: "Create Note"
+SyncManager::~SyncManager() {
+    dbManager->deleteLater();
+}
+
+void SyncManager::setDbManager(DatabaseManager *manager){
+    dbManager = manager;
+}
+
+void SyncManager::syncAllNotes() {
+    QList<Note*> notes = dbManager->getModel()->getNotes();
+    for(int i = 0; i < notes.length(); i++) {
+        emit syncNote(notes.at(i));
     }
-    SilicaFlickable {
-        id: flickable
-        anchors.fill: parent
-        anchors.topMargin: 150
-            contentHeight: column.height
-            Column {
-                id: column
-                width: parent.width
-                spacing: 20
+}
 
-                Label {
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Title:"
-                 }
+void SyncManager::deleteAllNotes() {
+    QList<Note*> notes = dbManager->getModel()->getNotes();
 
-                TextField {
-                    id: notetitle
-                    width: 480
-                    height: 30
-                    placeholderText: "Note title"
-                 }
-
-                Label {
-                    id: notelabel
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Note:"
-                 }
-
-                TextArea {
-                    id: notetext
-                    width: 480
-                    height: 300
-                    placeholderText: "Enter text here!"
-                }
-
-                Button {
-                    text: "Save"
-                    onClicked: {
-                        dbManager.storeNote(notetitle.text, notetext.text);
-                        pageStack.pop();
-                    }
-                }
-            }
+    for(int i = 0; i < notes.length(); i++) {
+        emit deleteNote(notes.at(i)->getRemoteId());
     }
 }
