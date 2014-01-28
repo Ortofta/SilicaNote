@@ -30,9 +30,7 @@
 
 #include "syncmanager.h"
 
-SyncManager::SyncManager(QObject *parent) : QObject(parent) {
-
-}
+SyncManager::SyncManager(QObject *parent) : QObject(parent) {}
 
 SyncManager::~SyncManager() {
     dbManager->deleteLater();
@@ -51,6 +49,7 @@ void SyncManager::syncAllNotes() {
 
 void SyncManager::deleteAllNotes() {
     QList<Note*> notes = dbManager->getModel()->getNotes();
+
     for(int i = 0; i < notes.length(); i++) {
         emit deleteNote(notes.at(i)->getRemoteId());
     }
