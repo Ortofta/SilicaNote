@@ -20,10 +20,10 @@ License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-silicanote.yaml
 Requires:   sailfishsilica-qt5
-BuildRequires:  pkgconfig(sailfishapp)
-BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  desktop-file-utils
 
 %description
@@ -62,13 +62,13 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/%{name}/qml
-%{_bindir}/%{name}
-/usr/bin
-/usr/share/harbour-silicanote
-/usr/share/applications
 /usr/share/icons/hicolor/86x86/apps
+/usr/share/applications
+/usr/share/harbour-silicanote
+/usr/bin
+%{_bindir}/%{name}
+%{_datadir}/%{name}/qml
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
 # >> files
 # << files

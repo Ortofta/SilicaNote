@@ -53,6 +53,7 @@ public slots:
     void fetchNote(double id);
     void deleteNote(double id);
     void requestFinished(QNetworkReply*);
+    void authenticate(QNetworkReply*,QAuthenticator*);
 };
 
 #endif // SERVERCOMMUNICATOR_H

@@ -33,6 +33,8 @@
 #include <QJsonArray>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QAuthenticator>
+#include <QtDebug>
 #include "servercommunicator.h"
 
 /**
@@ -46,6 +48,8 @@ ServerCommunicator::ServerCommunicator(QObject *parent) :
     manager = new QNetworkAccessManager(this);
     QObject::connect(manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(requestFinished(QNetworkReply*)));
+    QObject::connect(manager, SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
+            this, SLOT(authenticate(QNetworkReply*,QAuthenticator*)));
 
 }
 
@@ -124,6 +128,13 @@ void ServerCommunicator::requestFinished(QNetworkReply *reply) {
     }
 
     reply->deleteLater();
+}
+
+void ServerCommunicator::authenticate(QNetworkReply *reply, QAuthenticator *authenticator) {
+    Q_UNUSED(reply);
+    qDebug() << "Authentication required";
+    authenticator->setUser("test");
+    authenticator->setPassword("test");
 }
 
 QByteArray ServerCommunicator::toJson(const double id, const QString header, const QString body) {
