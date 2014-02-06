@@ -16,6 +16,11 @@ QString Settings::getPassword() {
     return _userSettings.value("password", "Password").toString();
 }
 
+bool Settings::isSyncEnabled() {
+    qDebug() << "Getting sync enabled";
+    return _userSettings.value("syncEnabled", true).toBool();
+}
+
 void Settings::setUserName(QString userName) {
     qDebug() << "Setting user name";
     return _userSettings.setValue("username", userName);
@@ -24,4 +29,9 @@ void Settings::setUserName(QString userName) {
 void Settings::setPassword(QString password) {
     qDebug() << "Setting password";
     return _userSettings.setValue("password", password);
+}
+
+void Settings::setSyncEnabled(bool isSyncEnabled) {
+    qDebug() << "Setting sync enabled";
+    return _userSettings.setValue("syncEnabled", isSyncEnabled);
 }

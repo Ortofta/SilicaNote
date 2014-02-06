@@ -29,7 +29,7 @@ Page {
                 id: username
                 width: 480
                 height: 50
-                text: userSettings.username
+                text: userSettings.getUserName()
                 placeholderText: "Username"
             }
 
@@ -42,15 +42,26 @@ Page {
                 id: password
                 width: 480
                 height: 50
-                text: userSettings.password
+                text: userSettings.getPassword()
                 placeholderText: "Password"
                 echoMode: TextInput.PasswordEchoOnEdit
+            }
+            Label{
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Enable sync:"
+            }
+
+            Switch {
+                id: sync
+                checked: userSettings.isSyncEnabled()
             }
             Button {
                 text: "Save"
                 onClicked: {
                     userSettings.setPassword(password.text);
                     userSettings.setUserName(username.text);
+                    userSettings.setSyncEnabled(sync.checked);
                     pageStack.pop();
                 }
             }
