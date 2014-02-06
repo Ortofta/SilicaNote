@@ -38,6 +38,7 @@
 #include "databasemanager.h"
 #include "syncmanager.h"
 #include "note.h"
+#include "settings.h"
 
 int main(int argc, char *argv[])
 {
@@ -74,10 +75,13 @@ int main(int argc, char *argv[])
     QObject::connect(&syncManager, SIGNAL(deleteNote(double)),
                      &communicator, SLOT(deleteNote(double)));
 
+    Settings settings;
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);
     view->rootContext()->setContextProperty("noteModel", dbManager.getModel());
     view->rootContext()->setContextProperty("syncManager", &syncManager);
+    view->rootContext()->setContextProperty("userSettings", &settings);
 
     view->setSource(QUrl(SailfishApp::pathTo("qml/Silicanote.qml")));
     view->show();

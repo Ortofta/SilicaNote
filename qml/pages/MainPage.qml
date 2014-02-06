@@ -69,6 +69,10 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
             }
             MenuItem {
+                text: "Settings"
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
+            }
+            MenuItem {
                 text: "Sync All Notes"
                 onClicked:{
                     syncManager.deleteAllNotes();

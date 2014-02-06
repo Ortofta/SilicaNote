@@ -35,14 +35,14 @@ CoverBackground {
     Label {
         id: label
         anchors.centerIn: parent
-        text: "My Cover"
+        text: "SilicaNote"
     }
 
     CoverActionList {
         id: coverAction
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-next"
+            iconSource: "image://theme/ "
         }
 
         CoverAction {
