@@ -42,6 +42,7 @@ Page {
         anchors.top: parent.top
         model:noteModel
         header: PageHeader { title: "SilicaNote" }
+        VerticalScrollDecorator {}
         ViewPlaceholder {
             id: test
             enabled:  noteModel.count() === 0
@@ -51,6 +52,11 @@ Page {
             id: listItem
             width: ListView.view.width
             height: Theme.itemSizeSmall
+            anchors {
+                left: parent.left
+                right: parent.right
+                margins: Theme.paddingLarge
+            }
             Label {
                 id: label
                 text: title

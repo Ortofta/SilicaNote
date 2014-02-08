@@ -47,31 +47,20 @@ Page {
                 width: parent.width
                 spacing: 20
 
-                Label {
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Title:"
-                 }
-
                 TextField {
                     id: notetitle
                     width: 480
-                    height: 30
+                    height: 100
                     placeholderText: "Note title"
-                 }
-
-                Label {
-                    id: notelabel
-                    color: Theme.highlightColor
-                    font.family: Theme.fontFamilyHeading
-                    text: "Note:"
+                    label: "Note tile"
                  }
 
                 TextArea {
                     id: notetext
                     width: 480
                     height: 300
-                    placeholderText: "Enter text here!"
+                    placeholderText: "Note content"
+                    label: "Note content"
                 }
 
                 Button {

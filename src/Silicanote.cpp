@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     QObject::connect(&dbManager, SIGNAL(noteStored(Note*)),
                      &communicator, SLOT(syncNote(Note*)));
     QObject::connect(&communicator, SIGNAL(noteFetched(Note*)),
-                     &dbManager, SIGNAL(updateNote(Note*)));
+                     &dbManager, SLOT(updateNote(Note*)));
     QObject::connect(&syncManager, SIGNAL(syncNote(Note*)),
                      &communicator, SLOT(syncNote(Note*)));
     QObject::connect(&syncManager, SIGNAL(deleteNote(double)),
