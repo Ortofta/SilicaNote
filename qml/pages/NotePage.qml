@@ -31,12 +31,14 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Page {
+Dialog {
     id: notepage
-
-    PageHeader {
-        title: "Create Note"
+    onDone: {
+        if (result === DialogResult.Accepted) {
+            dbManager.storeNote(notetitle.text, notetext.text);
+        }
     }
+
     SilicaFlickable {
         id: flickable
         anchors.fill: parent
@@ -61,14 +63,6 @@ Page {
                     height: 300
                     placeholderText: "Note content"
                     label: "Note content"
-                }
-
-                Button {
-                    text: "Save"
-                    onClicked: {
-                        dbManager.storeNote(notetitle.text, notetext.text);
-                        pageStack.pop();
-                    }
                 }
             }
     }

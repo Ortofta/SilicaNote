@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 Dialog {
     id:settings
     onDone: {
-        if (result == DialogResult.Accepted) {
+        if (result === DialogResult.Accepted) {
             userSettings.setPassword(password.text);
             userSettings.setUserName(username.text);
             userSettings.setSyncEnabled(sync.checked);
