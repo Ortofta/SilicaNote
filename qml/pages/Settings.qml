@@ -17,31 +17,22 @@ Dialog {
         width: parent.width
         spacing: 20
 
-        Label {
-            color: Theme.highlightColor
-            font.family: Theme.fontFamilyHeading
-            text: "Username:"
-        }
-
         TextField {
             id: username
             width: 480
-            height: 50
+            height: 100
             text: userSettings.getUserName()
             placeholderText: "Username"
+            label: "Username"
         }
 
-        Label {
-            color: Theme.highlightColor
-            font.family: Theme.fontFamilyHeading
-            text: "Password:"
-        }
         TextField {
             id: password
             width: 480
-            height: 50
+            height: 100
             text: userSettings.getPassword()
             placeholderText: "Password"
+            label: "Password"
             echoMode: TextInput.PasswordEchoOnEdit
         }
         Label{
