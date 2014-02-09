@@ -35,15 +35,17 @@
 #include <QNetworkAccessManager>
 #include <QList>
 #include "note.h"
+#include "settings.h"
 
 class ServerCommunicator : public QObject
 {
     Q_OBJECT
+    Settings *settings;
     QNetworkAccessManager *manager;
     QByteArray toJson(const double id, const QString header, const QString body);
     QList<Note*> fromJson(QByteArray json);
 public:
-    explicit ServerCommunicator(QObject *parent = 0);
+    explicit ServerCommunicator(QObject *parent = 0, Settings *settings = 0);
     ~ServerCommunicator();
 signals:
     void noteFetched(Note* note);

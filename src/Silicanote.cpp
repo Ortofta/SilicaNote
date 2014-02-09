@@ -55,8 +55,10 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Note>("org.silicanote.notelist.note", 1, 0, "Note");
 
-    ServerCommunicator communicator;
-    engine.rootContext()->setContextProperty("communicator", &communicator);
+    Settings settings;
+
+    ServerCommunicator* communicator = new ServerCommunicator(0, &settings);
+    engine.rootContext()->setContextProperty("communicator", communicator);
 
     DatabaseManager dbManager;
     dbManager.getNotes();
@@ -67,15 +69,13 @@ int main(int argc, char *argv[])
 
     // Hook up slots and signals
     QObject::connect(&dbManager, SIGNAL(noteStored(Note*)),
-                     &communicator, SLOT(syncNote(Note*)));
-    QObject::connect(&communicator, SIGNAL(noteFetched(Note*)),
+                     communicator, SLOT(syncNote(Note*)));
+    QObject::connect(communicator, SIGNAL(noteFetched(Note*)),
                      &dbManager, SLOT(updateNote(Note*)));
     QObject::connect(&syncManager, SIGNAL(syncNote(Note*)),
-                     &communicator, SLOT(syncNote(Note*)));
+                     communicator, SLOT(syncNote(Note*)));
     QObject::connect(&syncManager, SIGNAL(deleteNote(double)),
-                     &communicator, SLOT(deleteNote(double)));
-
-    Settings settings;
+                     communicator, SLOT(deleteNote(double)));
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("dbManager", &dbManager);

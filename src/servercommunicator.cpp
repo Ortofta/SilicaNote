@@ -42,10 +42,11 @@
  * @brief ServerCommunicator::ServerCommunicator
  * @param parent
  */
-ServerCommunicator::ServerCommunicator(QObject *parent) :
+ServerCommunicator::ServerCommunicator(QObject *parent, Settings *settings) :
     QObject(parent)
 {
     manager = new QNetworkAccessManager(this);
+    this->settings = settings;
     QObject::connect(manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(requestFinished(QNetworkReply*)));
     QObject::connect(manager, SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
@@ -133,8 +134,8 @@ void ServerCommunicator::requestFinished(QNetworkReply *reply) {
 void ServerCommunicator::authenticate(QNetworkReply *reply, QAuthenticator *authenticator) {
     Q_UNUSED(reply);
     qDebug() << "Authentication required";
-    authenticator->setUser("test");
-    authenticator->setPassword("test");
+    authenticator->setUser(settings->getUserName());
+    authenticator->setPassword(settings->getPassword());
 }
 
 QByteArray ServerCommunicator::toJson(const double id, const QString header, const QString body) {
