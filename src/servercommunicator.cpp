@@ -69,11 +69,16 @@ ServerCommunicator::~ServerCommunicator() {
  * @param body
  */
 void ServerCommunicator::syncNote(Note *note) {
-    QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
-    QNetworkRequest request;
-    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    manager->post(request, data);
+    if(settings->isSyncEnabled()) {
+        qDebug() << "Sync is enabled";
+        QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
+        QNetworkRequest request;
+        request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        manager->post(request, data);
+    } else {
+        qDebug() << "Sync is disabled";
+    }
 }
 
 /**
