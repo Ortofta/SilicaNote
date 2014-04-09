@@ -65,7 +65,7 @@ Page {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NotePage.qml"), {noteTitle:title,noteBody:body})
+                    pageStack.push(Qt.resolvedUrl("NotePage.qml"), {note_title:title, note_content:body})
                 }
             }
         }
@@ -80,6 +80,7 @@ Page {
             }
             MenuItem {
                 text: "Sync All Notes"
+                visible: userSettings.isSyncEnabled()
                 onClicked:{
                     syncManager.deleteAllNotes();
                     syncManager.syncAllNotes();

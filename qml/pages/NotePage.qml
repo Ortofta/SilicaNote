@@ -32,6 +32,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Dialog {
+
+    property string note_id
+    property string note_title
+    property string note_content
+
     id: notepage
     onDone: {
         if (result === DialogResult.Accepted) {
@@ -53,8 +58,9 @@ Dialog {
                     id: notetitle
                     width: 480
                     height: 100
-                    placeholderText: "Note title"
+                    placeholderText: "Note tile"
                     label: "Note tile"
+                    text: note_title
                  }
 
                 TextArea {
@@ -63,6 +69,7 @@ Dialog {
                     height: 300
                     placeholderText: "Note content"
                     label: "Note content"
+                    text: note_content
                 }
             }
     }

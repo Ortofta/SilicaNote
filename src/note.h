@@ -45,6 +45,7 @@ public:
     explicit Note(QObject *parent = 0);
     Q_PROPERTY(QString title READ getTitle WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString body READ getBody WRITE setBody NOTIFY bodyChanged)
+    Q_PROPERTY(QString rowid READ getRowId)
     Q_INVOKABLE void setRowId(double rowId);
     Q_INVOKABLE double getRowId();
     Q_INVOKABLE void setRemoteId(double remoteId);
