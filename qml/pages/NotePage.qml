@@ -40,7 +40,7 @@ Dialog {
     id: notepage
     onDone: {
         if (result === DialogResult.Accepted) {
-            dbManager.storeNote(notetitle.text, notetext.text);
+            dbManager.updateNote(note_id, notetitle.text, notetext.text);
         }
     }
 

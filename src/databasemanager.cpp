@@ -95,8 +95,24 @@ double DatabaseManager::storeNote(QString title, QString body) {
     return note->getRowId();
 }
 
-void DatabaseManager::updateNote(Note *note) {
+void DatabaseManager::updateNote(const QString rowId, const QString title, const QString body) {
+    if(!isDbOpen()) {
+        qDebug() << "Database is not open - no data has been saved";
+    }
 
+    QSqlQuery query(db);
+
+    query.prepare("UPDATE notes SET title=?, note=? WHERE rowid=?");
+    query.bindValue(0, title);
+    query.bindValue(1, body);
+    query.bindValue(2, rowId);
+
+    query.exec();
+    query.clear();
+
+    Note *note = new Note(title, body);
+    note->setRowId(rowId.toDouble());
+    emit noteStored(note);
 }
 
 bool DatabaseManager::isDbOpen() {
