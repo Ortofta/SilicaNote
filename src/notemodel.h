@@ -53,7 +53,8 @@ public:
 
     enum NoteRoles {
             TitleRole = Qt::UserRole + 1,
-            BodyRole
+            BodyRole,
+            IdRole
     };
 
 

@@ -41,6 +41,7 @@ QHash<int, QByteArray> NoteModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[TitleRole] = "title";
     roles[BodyRole] = "body";
+    roles[IdRole] = "rowid";
     return roles;
 }
 
@@ -54,8 +55,10 @@ QVariant NoteModel::data(const QModelIndex &index, int role) const {
     Note* note = _notes.at(index.row());
     if(NoteRoles(role) == TitleRole) {
         return note->getTitle();
-    } else {
+    } else if(NoteRoles(role) == BodyRole){
         return note->getBody();
+    } else {
+        return note->getRowId();
     }
 }
 
