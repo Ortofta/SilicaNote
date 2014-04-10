@@ -81,6 +81,11 @@ bool NoteModel::setData(const QModelIndex &index, const QVariant &value, int rol
     return false;
 }
 
+Qt::ItemFlags NoteModel::flags(const QModelIndex & index) const {
+    Q_UNUSED(index);
+    return Qt::ItemIsEditable;
+}
+
 bool NoteModel::insertRows(int position, int rows, const QModelIndex &parent) {
     Q_UNUSED(parent);
     qDebug() << "NoteModel::insertRows was called";

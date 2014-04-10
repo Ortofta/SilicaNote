@@ -48,6 +48,7 @@ public:
     bool setData(const QModelIndex & index, const QVariant & value, int role);
     bool insertRows(int position, int rows, const QModelIndex &parent);
     bool removeRows(int position, int rows, const QModelIndex &parent);
+    Qt::ItemFlags flags(const QModelIndex & index) const;
     void addNote(Note *note);
     void updateNote(Note *note);
     void clearModel();
