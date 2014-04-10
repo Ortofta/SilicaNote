@@ -45,9 +45,11 @@ public:
     QHash<int, QByteArray> roleNames() const;
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
+    bool setData(const QModelIndex & index, const QVariant & value, int role);
     bool insertRows(int position, int rows, const QModelIndex &parent);
     bool removeRows(int position, int rows, const QModelIndex &parent);
     void addNote(Note *note);
+    void updateNote(Note *note);
     void clearModel();
     QList<Note *> getNotes();
 

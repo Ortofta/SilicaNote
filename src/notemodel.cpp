@@ -30,6 +30,7 @@
 
 #include "notemodel.h"
 #include <QtDebug>
+#include <QVector>
 
 
 NoteModel::NoteModel(QObject *parent) :
@@ -60,6 +61,24 @@ QVariant NoteModel::data(const QModelIndex &index, int role) const {
     } else {
         return note->getRowId();
     }
+}
+
+bool NoteModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+    Note* note = _notes.at(index.row());
+    if(NoteRoles(role) == TitleRole) {
+        note->setTitle(value.toString());
+        //_notes.replace(index.row(), note);
+        emit dataChanged(index, index);
+        return true;
+    } else if(NoteRoles(role) == BodyRole){
+        note->setBody(value.toString());
+        QVector<int> * vect = new QVector<int>;
+        vect->append(role);
+        emit dataChanged(index, index);
+        return true;
+    }
+
+    return false;
 }
 
 bool NoteModel::insertRows(int position, int rows, const QModelIndex &parent) {
