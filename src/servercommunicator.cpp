@@ -73,7 +73,7 @@ void ServerCommunicator::syncNote(Note *note) {
         qDebug() << "Sync is enabled";
         QByteArray data = toJson(note->getRowId(), note->getTitle(), note->getBody());
         QNetworkRequest request;
-        request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/addnote"));
+        request.setUrl(QUrl("http://sync.silicanote.eu/silicanote-webapp/services/notes/addnote"));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         manager->post(request, data);
     } else {
@@ -86,7 +86,7 @@ void ServerCommunicator::syncNote(Note *note) {
  */
 void ServerCommunicator::fetchNotes() {
     QNetworkRequest request;
-    request.setUrl(QUrl("http://sync.silicanote.eu/services/notes/getnotes"));
+    request.setUrl(QUrl("http://sync.silicanote.eu/silicanote-webapp/services/notes/getnotes"));
     manager->get(request);
 }
 
@@ -97,7 +97,7 @@ void ServerCommunicator::fetchNotes() {
  */
 void ServerCommunicator::fetchNote(double id) {
     QNetworkRequest request;
-    QString url = "http://sync.silicanote.eu/services/notes/getnote/";
+    QString url = "http://sync.silicanote.eu/silicanote-webapp/services/notes/getnote/";
     url.append(QString::number(id));
     request.setUrl(QUrl(url));
     manager->get(request);
@@ -110,7 +110,7 @@ void ServerCommunicator::fetchNote(double id) {
  */
 void ServerCommunicator::deleteNote(double id) {
     QNetworkRequest request;
-    QString url = "http://sync.silicanote.eu/services/notes/deletenote/";
+    QString url = "http://sync.silicanote.eu/silicanote-webapp/services/notes/deletenote/";
     url.append(QString::number(id));
     request.setUrl(QUrl(url));
     manager->deleteResource(request);

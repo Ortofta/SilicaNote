@@ -43,11 +43,11 @@ Page {
         model:noteModel
         header: PageHeader { title: "SilicaNote" }
         VerticalScrollDecorator {}
-        ViewPlaceholder {
-            id: test
-            enabled:  noteModel.count() === 0
-            text: qsTr("You have no notes")
-        }
+        //ViewPlaceholder {
+        //    id: test
+        //    enabled:  noteModel.count() === 0
+        //    text: qsTr("You have no notes")
+        //}
         delegate: ListItem {
             id: listItem
             width: ListView.view.width

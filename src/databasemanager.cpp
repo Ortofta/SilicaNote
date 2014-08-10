@@ -35,6 +35,12 @@
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
     _noteModel = new NoteModel();
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+
+    if (!dir.exists()) {
+        dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    }
+
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     qDebug() << "Data path: " << dataPath;
     createDataDir(dataPath);
@@ -95,7 +101,11 @@ double DatabaseManager::storeNote(QString title, QString body) {
     return note->getRowId();
 }
 
-void DatabaseManager::updateNote(const QString rowId, const QString title, const QString body) {
+void DatabaseManager::updateNote(Note* note) {
+    updateNote(note->getRowId(), note->getTitle(), note->getBody());
+}
+
+void DatabaseManager::updateNote(const double rowId, const QString title, const QString body) {
     if(!isDbOpen()) {
         qDebug() << "Database is not open - no data has been saved";
     }
@@ -111,7 +121,7 @@ void DatabaseManager::updateNote(const QString rowId, const QString title, const
     query.clear();
 
     Note *note = new Note(title, body);
-    note->setRowId(rowId.toDouble());
+    note->setRowId(rowId);
     emit noteStored(note);
 }
 

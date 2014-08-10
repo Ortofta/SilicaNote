@@ -57,7 +57,8 @@ signals:
 public slots:
     double storeNote(const QString title, const QString body);
     void getNotes();
-    void updateNote(const QString rowId, const QString title, const QString body);
+    void updateNote(Note* note);
+    void updateNote(const double rowId, const QString title, const QString body);
 };
 
 // Second, define the singleton type provider function (callback).
