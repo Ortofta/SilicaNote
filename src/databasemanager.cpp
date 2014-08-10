@@ -105,12 +105,17 @@ void DatabaseManager::updateNote(Note* note) {
     updateNote(note->getRowId(), note->getTitle(), note->getBody());
 }
 
-void DatabaseManager::updateNote(const double rowId, const QString title, const QString body) {
+void DatabaseManager::updateNote(double rowId, const QString title, const QString body) {
     if(!isDbOpen()) {
         qDebug() << "Database is not open - no data has been saved";
     }
 
     QSqlQuery query(db);
+
+    // This is a bad idea - needs to be fixed :)
+    if(rowId == 0) {
+        rowId = storeNote(title, body);
+    }
 
     query.prepare("UPDATE notes SET title=?, note=? WHERE rowid=?");
     query.bindValue(0, title);
